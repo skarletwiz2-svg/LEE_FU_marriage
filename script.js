@@ -1,6 +1,6 @@
 const photos = [
-  { src: "images/KJH02144-2.webp", alt: "웨딩 갤러리 사진 1" },
-  { src: "images/KJH02546-2.webp", alt: "웨딩 갤러리 사진 2" }
+  { src: "images/KJH02144-2.jpg", alt: "웨딩 갤러리 사진 1" },
+  { src: "images/KJH02546-2.jpg", alt: "웨딩 갤러리 사진 2" }
 ];
 
 const lightbox = document.querySelector(".lightbox");
