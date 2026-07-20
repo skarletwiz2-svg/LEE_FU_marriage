@@ -58,8 +58,8 @@ function slideToPhoto(index, direction) {
     setTimeout(() => {
       fullImage.classList.remove(incomingClass);
       isPhotoSwitching = false;
-    }, 360);
-  }, 280);
+    }, 170);
+  }, 130);
 }
 
 function closeLightbox() {
