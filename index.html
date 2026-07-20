@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#181513">
   <title>우리의 결혼식에 초대합니다</title>
   <meta name="description" content="소중한 날, 함께해 주세요.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,6 +21,26 @@
       <h1>초대합니다</h1>
       <span class="fine-line"></span>
     </header>
+
+    <div class="story" aria-live="polite">
+      <div class="story-copy story-ko" lang="ko">
+        <p>홍콩의 아름다운 야경 아래서,</p>
+        <p>그리고 한국의 화사한 벚꽃 아래서</p>
+        <p>서로 다른 곳에서 자라온 두 사람이</p>
+        <p>이제 하나의 가족이 되려 합니다.</p>
+        <p>저희의 특별한 시작을 함께 축복해 주세요</p>
+      </div>
+      <div class="story-copy story-yue" lang="zh-HK">
+        <p>在香港美麗的夜景與韓國明媚的櫻花下</p>
+        <p>不同地方成長的兩人，如今即將共結連理。</p>
+        <p>誠邀一同見證並祝福我們這嶄新的篇章。</p>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>SCROLL</span>
+      <i></i>
+    </div>
 
     <section class="gallery-panel" aria-labelledby="gallery-title">
       <div class="gallery-heading">
@@ -40,6 +63,29 @@
       </div>
       <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
     </section>
+
+    <section class="wedding-day" aria-labelledby="wedding-day-title">
+      <p class="section-kicker">THE DAY WE BECOME ONE</p>
+      <h2 id="wedding-day-title">WEDDING DAY</h2>
+      <span class="day-ornament" aria-hidden="true">✦</span>
+
+      <div class="date-block" lang="ko">
+        <p class="date">2026년 11월 22일 (일) 오후 3시</p>
+        <p class="place">제이오스티엘 2층 티아라홀</p>
+      </div>
+
+      <div class="language-divider" aria-hidden="true"><span></span><em>粵</em><span></span></div>
+
+      <div class="date-block date-block-yue" lang="zh-HK">
+        <p class="date">2026年11月22日（星期日）下午3時</p>
+        <p class="place">JOSTIEL 二樓 TIARA宴會廳</p>
+      </div>
+    </section>
+
+    <footer class="closing">
+      <p>WITH LOVE</p>
+      <span>소중한 발걸음을 기다리겠습니다</span>
+    </footer>
   </main>
 
   <div class="lightbox" role="dialog" aria-modal="true" aria-label="사진 전체 화면 보기" hidden>
