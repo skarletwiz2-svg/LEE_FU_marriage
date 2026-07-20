@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#181513">
+  <title>우리의 결혼식에 초대합니다</title>
+  <meta name="description" content="소중한 날, 함께해 주세요.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="invitation">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+
+    <header class="intro">
+      <p class="eyebrow">OUR WEDDING</p>
+      <h1>초대합니다</h1>
+      <span class="fine-line"></span>
+    </header>
+
+    <section class="gallery-panel" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div>
+          <p>TOGETHER, ALWAYS</p>
+          <h2 id="gallery-title">Gallery</h2>
+        </div>
+        <span>02</span>
+      </div>
+
+      <div class="photo-grid">
+        <button class="photo-button" type="button" data-index="0" aria-label="웨딩 사진 1 전체 화면으로 보기">
+          <img src="images/KJH02144-2.webp" alt="웨딩 갤러리 사진 1">
+          <span class="view-label">VIEW</span>
+        </button>
+        <button class="photo-button" type="button" data-index="1" aria-label="웨딩 사진 2 전체 화면으로 보기">
+          <img src="images/KJH02546-2.webp" alt="웨딩 갤러리 사진 2">
+          <span class="view-label">VIEW</span>
+        </button>
+      </div>
+      <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
+    </section>
+  </main>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="사진 전체 화면 보기" hidden>
+    <button class="lightbox-backdrop" type="button" aria-label="닫기"></button>
+    <button class="close-button" type="button" aria-label="사진 닫기">×</button>
+    <img class="lightbox-image" src="" alt="">
+    <div class="lightbox-count" aria-live="polite"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
