@@ -30,6 +30,16 @@ window.addEventListener("pageshow", (event) => {
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");
 const counter = document.querySelector(".lightbox-count");
+let currentPhotoIndex = 0;
+let touchStartX = 0;
+let touchStartY = 0;
+
+function showPhoto(index) {
+  currentPhotoIndex = (index + photos.length) % photos.length;
+  fullImage.src = photos[currentPhotoIndex].src;
+  fullImage.alt = photos[currentPhotoIndex].alt;
+  counter.textContent = `${String(currentPhotoIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+}
 
 function closeLightbox() {
   lightbox.hidden = true;
@@ -39,9 +49,7 @@ function closeLightbox() {
 document.querySelectorAll(".photo-button").forEach((button) => {
   button.addEventListener("click", () => {
     const index = Number(button.dataset.index);
-    fullImage.src = photos[index].src;
-    fullImage.alt = photos[index].alt;
-    counter.textContent = `${String(index + 1).padStart(2, "0")} / 02`;
+    showPhoto(index);
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
     document.querySelector(".close-button").focus();
@@ -50,6 +58,24 @@ document.querySelectorAll(".photo-button").forEach((button) => {
 
 document.querySelector(".close-button").addEventListener("click", closeLightbox);
 document.querySelector(".lightbox-backdrop").addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("touchstart", (event) => {
+  if (event.touches.length !== 1) return;
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+}, { passive: true });
+
+lightbox.addEventListener("touchend", (event) => {
+  if (event.changedTouches.length !== 1) return;
+  const deltaX = event.changedTouches[0].clientX - touchStartX;
+  const deltaY = event.changedTouches[0].clientY - touchStartY;
+
+  if (Math.abs(deltaX) < 50 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+  showPhoto(currentPhotoIndex + (deltaX < 0 ? 1 : -1));
+}, { passive: true });
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
+  if (event.key === "ArrowLeft" && !lightbox.hidden) showPhoto(currentPhotoIndex - 1);
+  if (event.key === "ArrowRight" && !lightbox.hidden) showPhoto(currentPhotoIndex + 1);
 });
