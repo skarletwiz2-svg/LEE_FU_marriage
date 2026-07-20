@@ -4,7 +4,7 @@ html,body { margin:0; min-height:100%; background:#171513; }
 body { color:var(--ink); font-family:"Noto Serif KR","Batang","Times New Roman",serif; }
 button { font:inherit; }
 .invitation { position:relative; isolation:isolate; width:min(100%,520px); min-height:100svh; margin:0 auto; overflow:hidden; background:var(--paper); }
-.hero-photo { position:absolute; z-index:-3; top:0; left:50%; width:100%; height:100svh; transform:translateX(-50%) scale(1.03); background:url("images/KJH02739-2.jpg") center 34%/cover no-repeat; animation:soften 14s 3s cubic-bezier(.2,.7,.2,1) forwards; will-change:filter,transform; }
+.hero-photo { position:absolute; z-index:-3; top:0; left:50%; width:100%; height:100svh; transform:translateX(-50%) scale(1.03); background:url("images/KJH02739-2-hero.jpg") center 34%/cover no-repeat; animation:soften 14s 3s cubic-bezier(.2,.7,.2,1) forwards; will-change:filter,transform; }
 .hero-shade { position:absolute; z-index:-2; top:0; left:50%; width:100%; height:100svh; transform:translateX(-50%); background:linear-gradient(180deg,rgba(15,12,10,.08),rgba(15,12,10,.1) 40%,rgba(20,16,14,.58)); animation:deepen 2s 3s ease forwards; }
 .intro { height:100svh; min-height:620px; padding:54px 30px 20px; color:#fff; text-align:center; letter-spacing:.08em; animation:intro-away 1.2s 3s ease forwards; }
 .eyebrow { margin:0 0 12px; font:500 10px/1.4 Arial,sans-serif; letter-spacing:.36em; }
@@ -13,11 +13,16 @@ button { font:inherit; }
 .story { position:absolute; top:0; left:0; z-index:2; width:100%; height:100svh; pointer-events:none; display:grid; place-items:center; padding:90px 28px 74px; color:#fff; text-align:center; }
 .story-copy { position:absolute; width:calc(100% - 52px); opacity:0; text-shadow:0 2px 15px rgba(0,0,0,.45); }
 .story-copy p { margin:0 0 14px; }
-.story-ko { font-family:"Nanum Pen Script","Segoe Print",cursive; font-size:clamp(23px,6.5vw,32px); line-height:1.35; letter-spacing:.015em; animation:story-show 7s 3s ease-in-out both; }
+.story-ko { font-family:"Nanum Pen Script","Segoe Print",cursive; font-size:clamp(17px,4.7vw,23px); line-height:1.35; letter-spacing:.015em; animation:story-show 7s 3s ease-in-out both; }
 .story-yue { font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:clamp(17px,4.7vw,23px); font-weight:300; line-height:1.85; letter-spacing:.035em; animation:story-show 7s 10s ease-in-out both; }
 .scroll-cue { position:absolute; z-index:3; top:calc(100svh - 78px); left:50%; display:flex; flex-direction:column; align-items:center; gap:10px; color:rgba(255,255,255,.95); opacity:0; transform:translateX(-50%); animation:reveal-scroll 1.3s 17s ease forwards; }
 .scroll-cue span { font:600 12px/1 Arial,sans-serif; letter-spacing:.34em; }
 .scroll-cue i { display:block; width:1px; height:30px; background:linear-gradient(#fff,transparent); animation:scroll-pulse 1.8s ease-in-out infinite; }
+.invitation:not(.is-ready) .hero-photo,
+.invitation:not(.is-ready) .hero-shade,
+.invitation:not(.is-ready) .intro,
+.invitation:not(.is-ready) .story-copy,
+.invitation:not(.is-ready) .scroll-cue { animation-play-state:paused; }
 .gallery-panel { position:relative; z-index:4; width:calc(100% - 24px); margin:-20px auto 54px; padding:26px 20px 20px; border-radius:24px; background:rgba(246,241,234,.98); box-shadow:0 22px 70px rgba(25,20,17,.28); }
 .gallery-heading { display:flex; align-items:end; justify-content:space-between; margin-bottom:18px; }
 .gallery-heading p { margin:0 0 5px; color:var(--accent); font:600 9px/1 Arial,sans-serif; letter-spacing:.24em; }
@@ -56,5 +61,4 @@ button { font:inherit; }
 @keyframes reveal-scroll { to { opacity:1; } }
 @keyframes scroll-pulse { 0%,100% { opacity:.3; transform:scaleY(.55); transform-origin:top; } 50% { opacity:1; transform:scaleY(1); transform-origin:top; } }
 @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
-@media (prefers-reduced-motion:reduce) { .hero-photo,.hero-shade,.intro,.story-copy,.scroll-cue,.lightbox { animation-duration:.01ms; animation-delay:0ms; } .story-ko,.story-yue { position:relative; opacity:1; margin:18px 0; } .story { align-content:center; } }
 @media (min-width:521px) { .invitation { box-shadow:0 0 80px rgba(0,0,0,.4); } }
