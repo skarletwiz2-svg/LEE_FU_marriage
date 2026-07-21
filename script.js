@@ -59,6 +59,18 @@ if ("IntersectionObserver" in window) {
   heroObserver.observe(hero);
 }
 
+function warmUpScrollContent() {
+  document.querySelectorAll(".photo-button img").forEach((image) => {
+    if (typeof image.decode === "function") image.decode().catch(() => {});
+  });
+}
+
+if ("requestIdleCallback" in window) {
+  requestIdleCallback(warmUpScrollContent, { timeout: 1800 });
+} else {
+  setTimeout(warmUpScrollContent, 600);
+}
+
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");
 const counter = document.querySelector(".lightbox-count");
