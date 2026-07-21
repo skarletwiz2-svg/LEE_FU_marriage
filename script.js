@@ -35,8 +35,29 @@ if (blurredHeroPreloader.complete) markHeroReady("blurred");
 setTimeout(() => startInvitationAnimation(), 4000);
 
 window.addEventListener("pageshow", (event) => {
-  if (event.persisted) startInvitationAnimation(true);
+  if (event.persisted) {
+    invitation.classList.remove("intro-finished");
+    startInvitationAnimation(true);
+  }
 });
+
+const petals = document.querySelector(".petals");
+const heroBlur = document.querySelector(".hero-blur");
+petals.addEventListener("animationend", (event) => {
+  if (event.animationName === "petals-window") invitation.classList.add("intro-finished");
+});
+heroBlur.addEventListener("animationend", () => {
+  heroBlur.style.willChange = "auto";
+}, { once: true });
+
+const hero = document.querySelector(".intro");
+const scrollPulse = document.querySelector(".scroll-cue i");
+if ("IntersectionObserver" in window) {
+  const heroObserver = new IntersectionObserver(([entry]) => {
+    scrollPulse.style.animationPlayState = entry.isIntersecting ? "running" : "paused";
+  }, { threshold: 0 });
+  heroObserver.observe(hero);
+}
 
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");
