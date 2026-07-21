@@ -74,6 +74,29 @@ if ("requestIdleCallback" in window) {
   setTimeout(warmUpScrollContent, 600);
 }
 
+const copyAddressButton = document.querySelector(".copy-address");
+const copyFeedback = document.querySelector(".copy-feedback");
+
+async function copyVenueAddress() {
+  const address = copyAddressButton.dataset.address;
+  try {
+    await navigator.clipboard.writeText(address);
+  } catch (error) {
+    const textarea = document.createElement("textarea");
+    textarea.value = address;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+  }
+  copyFeedback.textContent = "복사됨 · 已複製";
+  setTimeout(() => { copyFeedback.textContent = ""; }, 1800);
+}
+
+copyAddressButton.addEventListener("click", copyVenueAddress);
+
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");
 const counter = document.querySelector(".lightbox-count");

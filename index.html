@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260721-18">
+  <link rel="stylesheet" href="style.css?v=20260721-19">
 </head>
 <body>
   <main class="invitation">
@@ -123,6 +123,7 @@
         </button>
       </div>
       <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
+      <p class="gallery-note gallery-note-yue" lang="zh-HK">點擊相片即可放大查看</p>
     </section>
 
     <section class="location-section" aria-labelledby="location-title">
@@ -130,7 +131,16 @@
       <h2 id="location-title">LOCATION</h2>
       <p class="venue-name">제이오스티엘</p>
       <a class="venue-phone" href="tel:02-2635-2222">02-2635-2222</a>
-      <p class="venue-address">서울특별시 구로구 구로동 604-19<br>(경인로 565)</p>
+      <div class="address-row">
+        <div class="address-copy">
+          <p class="venue-address">서울특별시 구로구 구로동 604-19<br>(경인로 565)</p>
+          <p class="venue-address venue-address-yue" lang="zh-HK">首爾特別市九老區九老洞604-19<br>（京仁路565）</p>
+        </div>
+        <button class="copy-address" type="button" aria-label="주소 복사" data-address="서울특별시 구로구 구로동 604-19 (경인로 565)">
+          <span class="copy-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="copy-feedback" role="status" aria-live="polite"></p>
 
       <div class="map-frame">
         <iframe
@@ -152,12 +162,15 @@
           <div>
             <h3>지하철로 오시는 경우</h3>
             <p>지하철 1호선 구로역 2번, 3번 출구 도보 3분</p>
+            <h3 class="transport-yue" lang="zh-HK">乘搭地鐵前往</h3>
+            <p class="transport-yue" lang="zh-HK">乘搭地鐵1號線至九老站，<br>從2號或3號出口步行約3分鐘</p>
           </div>
         </article>
         <article>
           <span class="transport-icon" aria-hidden="true">🚌</span>
           <div>
             <h3>버스로 오시는 경우</h3>
+            <h3 class="transport-yue" lang="zh-HK">乘搭巴士前往</h3>
           </div>
         </article>
       </div>
@@ -176,6 +189,6 @@
     <div class="lightbox-count" aria-live="polite"></div>
   </div>
 
-  <script src="script.js?v=20260721-13"></script>
+  <script src="script.js?v=20260721-14"></script>
 </body>
 </html>

@@ -95,11 +95,21 @@ button { font:inherit; }
 .photo-button:active img { transform:scale(1.035); }
 .view-label { position:absolute; right:10px; bottom:10px; padding:6px 8px; border-radius:999px; color:#fff; background:rgba(22,18,16,.48); font:600 8px/1 Arial,sans-serif; letter-spacing:.15em; backdrop-filter:blur(5px); }
 .gallery-note { margin:15px 0 0; color:var(--muted); text-align:center; font-size:11px; letter-spacing:.04em; }
+.gallery-note-yue { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:12px; }
 .location-section { padding:78px 20px 72px; text-align:center; background:#f2efeb; }
 .location-section h2 { margin:0 0 27px; font:400 30px/1.2 Georgia,serif; letter-spacing:.12em; }
 .venue-name { margin:0 0 7px; font-size:18px; font-weight:500; }
 .venue-phone { color:#8e6f67; font-size:13px; text-decoration:none; }
-.venue-address { margin:12px 0 28px; color:#726a64; font-size:13px; line-height:1.8; }
+.address-row { display:flex; align-items:center; justify-content:center; gap:9px; margin:12px auto 0; }
+.address-copy { min-width:0; }
+.venue-address { margin:0; color:#726a64; font-size:13px; line-height:1.8; }
+.venue-address-yue { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:12px; }
+.copy-address { position:relative; flex:0 0 32px; width:32px; height:32px; padding:0; border:1px solid #d8d0ca; border-radius:9px; color:#8d827a; background:#fff; cursor:pointer; }
+.copy-address:active { transform:scale(.94); background:#f4eee9; }
+.copy-icon::before, .copy-icon::after { content:""; position:absolute; width:9px; height:11px; border:1px solid currentColor; border-radius:1px; }
+.copy-icon::before { top:8px; left:9px; }
+.copy-icon::after { top:11px; left:12px; background:#fff; }
+.copy-feedback { min-height:17px; margin:5px 0 18px; color:#a17368; font-size:11px; }
 .map-frame { height:265px; overflow:hidden; border-radius:15px; background:#dedbd6; box-shadow:0 8px 20px rgba(45,38,34,.11); contain:strict; transform:translateZ(0); }
 .map-frame iframe { width:100%; height:100%; border:0; pointer-events:none; }
 .map-buttons { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:14px 0 36px; }
@@ -109,6 +119,9 @@ button { font:inherit; }
 .transport-icon { padding-top:1px; font-size:18px; filter:grayscale(1); opacity:.62; }
 .transport-list h3 { margin:0 0 12px; font-size:14px; font-weight:500; }
 .transport-list p { margin:0; color:#625b56; font-size:13px; line-height:1.8; }
+.transport-list .transport-yue { font-family:"LXGW WenKai TC","Noto Serif HK",serif; }
+.transport-list h3.transport-yue { margin:17px 0 8px; color:#554d48; font-size:14px; }
+.transport-list p.transport-yue { color:#746b65; font-size:13px; }
 .transport-list .transport-placeholder { color:#aaa09a; }
 .wedding-day { position:relative; padding:82px 26px 88px; text-align:center; background:#eee5db; border-top:1px solid #ddcfc4; border-bottom:1px solid #d8c7bc; box-shadow:inset 0 12px 28px rgba(115,87,73,.035),inset 0 -12px 28px rgba(115,87,73,.035); }
 .section-kicker { margin:0 0 11px; color:var(--accent); font:600 8px/1 Arial,sans-serif; letter-spacing:.3em; }
