@@ -1,6 +1,6 @@
 const photos = [
-  { src: "images/KJH02144-2.jpg", alt: "웨딩 갤러리 사진 1" },
-  { src: "images/KJH02546-2.jpg", alt: "웨딩 갤러리 사진 2" }
+  { src: "images/KJH02144-2.jpg?v=20260721-8", alt: "웨딩 갤러리 사진 1" },
+  { src: "images/KJH02546-2.jpg?v=20260721-8", alt: "웨딩 갤러리 사진 2" }
 ];
 
 const invitation = document.querySelector(".invitation");
