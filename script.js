@@ -3,6 +3,9 @@ const photos = [
   { src: "images/KJH02546-2.jpg?v=20260721-8", alt: "웨딩 갤러리 사진 2" }
 ];
 
+const initialHeroHeight = window.innerHeight;
+document.documentElement.style.setProperty("--hero-height", `${initialHeroHeight}px`);
+
 const invitation = document.querySelector(".invitation");
 const heroPreloader = new Image();
 const blurredHeroPreloader = new Image();
