@@ -100,11 +100,11 @@ button { font:inherit; }
 .location-section h2 { margin:0 0 27px; font:400 30px/1.2 Georgia,serif; letter-spacing:.12em; }
 .venue-name { margin:0 0 7px; font-size:18px; font-weight:500; }
 .venue-phone { color:#8e6f67; font-size:13px; text-decoration:none; }
-.address-row { display:flex; align-items:center; justify-content:center; gap:9px; margin:12px auto 0; }
-.address-copy { min-width:0; }
+.address-row { position:relative; width:100%; margin:12px auto 0; }
+.address-copy { width:100%; text-align:center; }
 .venue-address { margin:0; color:#726a64; font-size:13px; line-height:1.8; }
 .venue-address-yue { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:12px; }
-.copy-address { position:relative; flex:0 0 32px; width:32px; height:32px; padding:0; border:1px solid #d8d0ca; border-radius:9px; color:#8d827a; background:#fff; cursor:pointer; }
+.copy-address { position:absolute; top:6px; left:calc(50% + 105px); width:32px; height:32px; padding:0; border:1px solid #d8d0ca; border-radius:9px; color:#8d827a; background:#fff; cursor:pointer; }
 .copy-address:active { transform:scale(.94); background:#f4eee9; }
 .copy-icon::before, .copy-icon::after { content:""; position:absolute; width:9px; height:11px; border:1px solid currentColor; border-radius:1px; }
 .copy-icon::before { top:8px; left:9px; }
@@ -120,7 +120,7 @@ button { font:inherit; }
 .transport-list h3 { margin:0 0 12px; font-size:14px; font-weight:500; }
 .transport-list p { margin:0; color:#625b56; font-size:13px; line-height:1.8; }
 .transport-list .transport-yue { font-family:"LXGW WenKai TC","Noto Serif HK",serif; }
-.transport-list h3.transport-yue { margin:17px 0 8px; color:#554d48; font-size:14px; }
+.transport-list h3.transport-yue { margin:-5px 0 12px; color:#554d48; font-size:14px; }
 .transport-list p.transport-yue { color:#746b65; font-size:13px; }
 .transport-list .transport-placeholder { color:#aaa09a; }
 .wedding-day { position:relative; padding:82px 26px 88px; text-align:center; background:#eee5db; border-top:1px solid #ddcfc4; border-bottom:1px solid #d8c7bc; box-shadow:inset 0 12px 28px rgba(115,87,73,.035),inset 0 -12px 28px rgba(115,87,73,.035); }
