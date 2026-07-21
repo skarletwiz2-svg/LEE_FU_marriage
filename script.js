@@ -5,7 +5,9 @@ const photos = [
 
 const invitation = document.querySelector(".invitation");
 const heroPreloader = new Image();
+const blurredHeroPreloader = new Image();
 let animationStarted = false;
+const readyHeroImages = new Set();
 
 function startInvitationAnimation(forceRestart = false) {
   if (animationStarted && !forceRestart) return;
@@ -17,10 +19,19 @@ function startInvitationAnimation(forceRestart = false) {
   });
 }
 
-heroPreloader.addEventListener("load", () => startInvitationAnimation());
-heroPreloader.addEventListener("error", () => startInvitationAnimation());
+function markHeroReady(key) {
+  readyHeroImages.add(key);
+  if (readyHeroImages.size >= 2) startInvitationAnimation();
+}
+
+heroPreloader.addEventListener("load", () => markHeroReady("sharp"));
+heroPreloader.addEventListener("error", () => markHeroReady("sharp"));
+blurredHeroPreloader.addEventListener("load", () => markHeroReady("blurred"));
+blurredHeroPreloader.addEventListener("error", () => markHeroReady("blurred"));
 heroPreloader.src = "images/KJH02739-2-hero.jpg";
-if (heroPreloader.complete) startInvitationAnimation();
+blurredHeroPreloader.src = "images/KJH02739-2-blur.jpg";
+if (heroPreloader.complete) markHeroReady("sharp");
+if (blurredHeroPreloader.complete) markHeroReady("blurred");
 setTimeout(() => startInvitationAnimation(), 4000);
 
 window.addEventListener("pageshow", (event) => {
