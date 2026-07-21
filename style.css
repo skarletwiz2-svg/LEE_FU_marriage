@@ -89,8 +89,8 @@ button { font:inherit; }
 .gallery-heading p { margin:0 0 5px; color:var(--accent); font:600 9px/1 Arial,sans-serif; letter-spacing:.24em; }
 .gallery-heading h2 { margin:0; font:italic 400 34px/1.05 Georgia,serif; }
 .gallery-heading>span { color:var(--muted); font:400 11px/1 Arial,sans-serif; letter-spacing:.18em; }
-.photo-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.photo-button { position:relative; min-width:0; height:clamp(230px,59vw,305px); padding:0; overflow:hidden; border:0; border-radius:14px; background:#ddd2c8; cursor:pointer; }
+.photo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; }
+.photo-button { position:relative; min-width:0; aspect-ratio:1/1; padding:0; overflow:hidden; border:0; border-radius:8px; background:#ddd2c8; cursor:pointer; }
 .photo-button img { width:100%; height:100%; display:block; object-fit:cover; transition:transform .5s ease; }
 .photo-button:active img { transform:scale(1.035); }
 .view-label { position:absolute; right:10px; bottom:10px; padding:6px 8px; border-radius:999px; color:#fff; background:rgba(22,18,16,.48); font:600 8px/1 Arial,sans-serif; letter-spacing:.15em; backdrop-filter:blur(5px); }
