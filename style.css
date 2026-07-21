@@ -100,10 +100,10 @@ button { font:inherit; }
 .location-section h2 { margin:0 0 27px; font:400 30px/1.2 Georgia,serif; letter-spacing:.12em; }
 .venue-name { margin:0 0 7px; font-size:18px; font-weight:500; }
 .venue-phone { color:#8e6f67; font-size:13px; text-decoration:none; }
-.address-row { position:relative; width:100%; margin:12px auto 0; }
-.address-copy { width:100%; text-align:center; }
+.address-row { position:relative; width:100%; margin:12px auto 0; text-align:center; }
+.address-row-en { margin-top:5px; }
 .venue-address { margin:0; color:#726a64; font-size:13px; line-height:1.8; }
-.venue-address-yue { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:12px; }
+.venue-address-en { font-family:Georgia,"Times New Roman",serif; font-size:12px; letter-spacing:.01em; }
 .copy-address { position:absolute; top:6px; left:calc(50% + 105px); width:32px; height:32px; padding:0; border:1px solid #d8d0ca; border-radius:9px; color:#8d827a; background:#fff; cursor:pointer; }
 .copy-address:active { transform:scale(.94); background:#f4eee9; }
 .copy-icon::before, .copy-icon::after { content:""; position:absolute; width:9px; height:11px; border:1px solid currentColor; border-radius:1px; }

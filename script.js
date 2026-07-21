@@ -74,11 +74,12 @@ if ("requestIdleCallback" in window) {
   setTimeout(warmUpScrollContent, 600);
 }
 
-const copyAddressButton = document.querySelector(".copy-address");
+const copyAddressButtons = document.querySelectorAll(".copy-address");
 const copyFeedback = document.querySelector(".copy-feedback");
 
-async function copyVenueAddress() {
-  const address = copyAddressButton.dataset.address;
+async function copyVenueAddress(event) {
+  const button = event.currentTarget;
+  const address = button.dataset.address;
   try {
     await navigator.clipboard.writeText(address);
   } catch (error) {
@@ -91,11 +92,11 @@ async function copyVenueAddress() {
     document.execCommand("copy");
     textarea.remove();
   }
-  copyFeedback.textContent = "복사됨 · 已複製";
+  copyFeedback.textContent = button.dataset.feedback;
   setTimeout(() => { copyFeedback.textContent = ""; }, 1800);
 }
 
-copyAddressButton.addEventListener("click", copyVenueAddress);
+copyAddressButtons.forEach((button) => button.addEventListener("click", copyVenueAddress));
 
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");

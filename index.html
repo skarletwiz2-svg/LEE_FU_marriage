@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260721-22">
+  <link rel="stylesheet" href="style.css?v=20260721-23">
 </head>
 <body>
   <main class="invitation">
@@ -132,11 +132,14 @@
       <p class="venue-name">제이오스티엘</p>
       <a class="venue-phone" href="tel:02-2635-2222">02-2635-2222</a>
       <div class="address-row">
-        <div class="address-copy">
-          <p class="venue-address">서울특별시 구로구 구로동 604-19<br>(경인로 565)</p>
-          <p class="venue-address venue-address-yue" lang="zh-HK">首爾特別市九老區九老洞604-19<br>（京仁路565）</p>
-        </div>
-        <button class="copy-address" type="button" aria-label="주소 복사" data-address="서울특별시 구로구 구로동 604-19 (경인로 565)">
+        <p class="venue-address">서울특별시 구로구 구로동 604-19<br>(경인로 565)</p>
+        <button class="copy-address" type="button" aria-label="한국어 주소 복사" data-address="서울특별시 구로구 구로동 604-19 (경인로 565)" data-feedback="복사됨">
+          <span class="copy-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="address-row address-row-en" lang="en">
+        <p class="venue-address venue-address-en">604-19, Guro-dong, Guro-gu, Seoul<br>(565, Gyeongin-ro)</p>
+        <button class="copy-address" type="button" aria-label="Copy English address" data-address="604-19, Guro-dong, Guro-gu, Seoul (565, Gyeongin-ro)" data-feedback="Copied">
           <span class="copy-icon" aria-hidden="true"></span>
         </button>
       </div>
@@ -189,6 +192,6 @@
     <div class="lightbox-count" aria-live="polite"></div>
   </div>
 
-  <script src="script.js?v=20260721-14"></script>
+  <script src="script.js?v=20260721-15"></script>
 </body>
 </html>
