@@ -100,28 +100,43 @@ const revealSections = document.querySelectorAll(
   ".family-section, .wedding-day, .gallery-panel, .location-section, .closing"
 );
 
-if ("IntersectionObserver" in window) {
-  revealSections.forEach((section) => section.classList.add("reveal-pending"));
+let revealTicking = false;
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.08) {
-        entry.target.classList.add("is-visible");
-        if (entry.target.matches(".gallery-panel")) {
-          revealObserver.unobserve(entry.target);
-        }
-      } else if (!entry.isIntersecting) {
-        entry.target.classList.remove("is-visible");
+function updateRevealSections() {
+  const viewportHeight = window.innerHeight;
+
+  revealSections.forEach((section) => {
+    if (section.dataset.revealComplete === "true") return;
+
+    const rect = section.getBoundingClientRect();
+    const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+    const showThreshold = Math.min(rect.height * 0.08, 64);
+
+    if (visibleHeight >= showThreshold) {
+      section.classList.add("is-visible");
+      if (section.matches(".gallery-panel")) {
+        section.dataset.revealComplete = "true";
       }
-    });
-  }, {
-    threshold: [0, 0.08, 0.18],
-    rootMargin: "0px 0px -4% 0px"
+    } else if (rect.bottom <= 0 || rect.top >= viewportHeight) {
+      section.classList.remove("is-visible");
+    }
   });
 
-  revealSections.forEach((section) => revealObserver.observe(section));
+  revealTicking = false;
 }
 
+function requestRevealUpdate() {
+  if (revealTicking) return;
+  revealTicking = true;
+  requestAnimationFrame(updateRevealSections);
+}
+
+revealSections.forEach((section) => section.classList.add("reveal-pending"));
+void document.body.offsetHeight;
+requestAnimationFrame(() => requestAnimationFrame(updateRevealSections));
+window.addEventListener("scroll", requestRevealUpdate, { passive: true });
+window.addEventListener("resize", requestRevealUpdate, { passive: true });
+window.addEventListener("pageshow", requestRevealUpdate);
 function warmUpScrollContent() {
   document.querySelectorAll(".photo-button img").forEach((image) => {
     if (typeof image.decode === "function") image.decode().catch(() => {});
