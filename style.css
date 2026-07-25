@@ -2,7 +2,7 @@
 * { box-sizing:border-box; }
 html,body { margin:0; min-height:100%; background:#171513; }
 body { color:var(--ink); font-family:"Noto Serif KR","Batang","Times New Roman",serif; }
-body.intro-locked { position:fixed; inset:0; width:100%; overflow:hidden; overscroll-behavior:none; touch-action:none; }
+html.intro-locked, body.intro-locked { height:100%; overflow:hidden; overscroll-behavior:none; }
 button { font:inherit; }
 .invitation { position:relative; isolation:isolate; width:min(100%,520px); min-height:100svh; margin:0 auto; overflow:hidden; background:var(--paper); }
 .hero-photo { position:absolute; z-index:-4; top:0; left:0; width:100%; height:var(--hero-height); background:url("images/KJH02739-2-hero.jpg") center 34%/cover no-repeat; }
