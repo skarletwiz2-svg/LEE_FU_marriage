@@ -65,15 +65,24 @@ if ("IntersectionObserver" in window) {
   heroObserver.observe(hero);
 }
 
-const weddingDay = document.querySelector(".wedding-day");
-if (weddingDay && "IntersectionObserver" in window) {
-  weddingDay.classList.add("reveal-pending");
-  const weddingObserver = new IntersectionObserver(([entry], observer) => {
-    if (!entry.isIntersecting) return;
-    weddingDay.classList.add("is-visible");
-    observer.unobserve(weddingDay);
-  }, { threshold: 0.08 });
-  weddingObserver.observe(weddingDay);
+const revealSections = document.querySelectorAll(
+  ".family-section, .wedding-day, .gallery-panel, .location-section, .closing"
+);
+
+if ("IntersectionObserver" in window) {
+  revealSections.forEach((section) => section.classList.add("reveal-pending"));
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const shouldShow = entry.isIntersecting && entry.intersectionRatio >= 0.08;
+      entry.target.classList.toggle("is-visible", shouldShow);
+    });
+  }, {
+    threshold: [0, 0.08, 0.18],
+    rootMargin: "0px 0px -4% 0px"
+  });
+
+  revealSections.forEach((section) => revealObserver.observe(section));
 }
 
 function warmUpScrollContent() {

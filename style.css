@@ -129,6 +129,14 @@ button { font:inherit; }
 .wedding-card > * { position:relative; z-index:1; }
 .wedding-day.reveal-pending .wedding-card { opacity:0; transform:translate3d(0,190px,0) rotateX(4deg) scale(.965); }
 .wedding-day.is-visible .wedding-card { opacity:1; transform:translate3d(0,0,0) rotateX(0) scale(1); transition:opacity 1.65s ease,transform 2.05s cubic-bezier(.16,.62,.18,1); }
+.family-section.reveal-pending > *,
+.location-section.reveal-pending > *,
+.closing.reveal-pending > * { opacity:0; transform:translate3d(0,125px,0); transition:opacity 1.05s ease,transform 1.55s cubic-bezier(.16,.62,.18,1); }
+.family-section.is-visible > *,
+.location-section.is-visible > *,
+.closing.is-visible > * { opacity:1; transform:translate3d(0,0,0); }
+.gallery-panel.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); transition:opacity 1.05s ease,transform 1.55s cubic-bezier(.16,.62,.18,1); }
+.gallery-panel.is-visible { opacity:1; transform:translate3d(0,0,0) scale(1); }
 .section-kicker { margin:0 0 11px; color:var(--accent); font:600 8px/1 Arial,sans-serif; letter-spacing:.3em; }
 .wedding-day h2 { margin:0; font:400 27px/1.3 Georgia,serif; letter-spacing:.12em; }
 .day-ornament { display:block; margin:20px 0 27px; color:#bc9186; font-size:11px; }
@@ -168,5 +176,12 @@ button { font:inherit; }
 @keyframes slide-in-right { from { opacity:0; transform:translateX(28%); } to { opacity:1; transform:translateX(0); } }
 @keyframes slide-in-left { from { opacity:0; transform:translateX(-28%); } to { opacity:1; transform:translateX(0); } }
 @media (max-width:360px) { .wedding-card { padding-right:39px; padding-left:39px; } .date-block .date { font-size:15px; } }
-@media (prefers-reduced-motion:reduce) { .wedding-day.reveal-pending .wedding-card { opacity:1; transform:none; } .wedding-day.is-visible .wedding-card { transition:none; } }
+@media (prefers-reduced-motion:reduce) {
+  .wedding-day.reveal-pending .wedding-card,
+  .family-section.reveal-pending > *,
+  .location-section.reveal-pending > *,
+  .closing.reveal-pending > *,
+  .gallery-panel.reveal-pending { opacity:1; transform:none; transition:none; }
+  .wedding-day.is-visible .wedding-card { transition:none; }
+}
 @media (min-width:521px) { .invitation { box-shadow:0 0 80px rgba(0,0,0,.4); } }
