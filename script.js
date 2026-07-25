@@ -74,8 +74,11 @@ if ("IntersectionObserver" in window) {
 
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      const shouldShow = entry.isIntersecting && entry.intersectionRatio >= 0.08;
-      entry.target.classList.toggle("is-visible", shouldShow);
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.08) {
+        entry.target.classList.add("is-visible");
+      } else if (!entry.isIntersecting) {
+        entry.target.classList.remove("is-visible");
+      }
     });
   }, {
     threshold: [0, 0.08, 0.18],
