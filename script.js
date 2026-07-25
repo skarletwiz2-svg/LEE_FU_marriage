@@ -8,20 +8,35 @@ const photos = [
 
 const initialHeroHeight = window.innerHeight;
 document.documentElement.style.setProperty("--hero-height", `${initialHeroHeight}px`);
+document.body.classList.add("intro-locked");
+window.scrollTo(0, 0);
 
 const invitation = document.querySelector(".invitation");
 const heroPreloader = new Image();
 const blurredHeroPreloader = new Image();
 let animationStarted = false;
+let introUnlockTimer;
 const readyHeroImages = new Set();
+
+function unlockInvitation() {
+  clearTimeout(introUnlockTimer);
+  document.body.classList.remove("intro-locked");
+  window.scrollTo(0, 0);
+}
 
 function startInvitationAnimation(forceRestart = false) {
   if (animationStarted && !forceRestart) return;
   animationStarted = true;
+  document.body.classList.add("intro-locked");
+  window.scrollTo(0, 0);
+  clearTimeout(introUnlockTimer);
   invitation.classList.remove("is-ready");
   void invitation.offsetWidth;
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => invitation.classList.add("is-ready"));
+    requestAnimationFrame(() => {
+      invitation.classList.add("is-ready");
+      introUnlockTimer = setTimeout(unlockInvitation, 11300);
+    });
   });
 }
 
@@ -50,7 +65,10 @@ window.addEventListener("pageshow", (event) => {
 const petals = document.querySelector(".petals");
 const heroBlur = document.querySelector(".hero-blur");
 petals.addEventListener("animationend", (event) => {
-  if (event.animationName === "petals-window") invitation.classList.add("intro-finished");
+  if (event.animationName === "petals-window") {
+    invitation.classList.add("intro-finished");
+    unlockInvitation();
+  }
 });
 heroBlur.addEventListener("animationend", () => {
   heroBlur.style.willChange = "auto";
@@ -76,6 +94,9 @@ if ("IntersectionObserver" in window) {
     entries.forEach((entry) => {
       if (entry.isIntersecting && entry.intersectionRatio >= 0.08) {
         entry.target.classList.add("is-visible");
+        if (entry.target.matches(".gallery-panel")) {
+          revealObserver.unobserve(entry.target);
+        }
       } else if (!entry.isIntersecting) {
         entry.target.classList.remove("is-visible");
       }
