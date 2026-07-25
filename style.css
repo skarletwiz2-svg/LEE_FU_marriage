@@ -134,6 +134,17 @@ button { font:inherit; }
 .transport-list h3.transport-yue { margin:-5px 0 12px; color:#554d48; font-size:var(--text-14); }
 .transport-list p.transport-yue { color:#746b65; font-size:var(--text-13); }
 .transport-list .transport-placeholder { color:#aaa09a; }
+.bus-routes { display:grid; gap:17px; margin-top:5px; }
+.bus-stop { padding:0 0 17px; border-bottom:1px dashed #d4ccc6; }
+.bus-stop:last-child { padding-bottom:0; border-bottom:0; }
+.transport-list .bus-stop p { line-height:1.75; word-break:keep-all; }
+.transport-list .bus-stop-ko { margin:0; }
+.transport-list .bus-stop-yue { margin:6px 0 0; color:#7b716b; }
+.bus-stop strong { color:#4b4541; font-weight:500; }
+.bus-stop strong span { display:inline-block; margin-right:6px; padding:2px 6px; border-radius:4px; color:#fff; background:#888581; font-family:Arial,sans-serif; font-size:var(--text-10); line-height:1.25; letter-spacing:0; vertical-align:1px; }
+.bus-stop em { display:inline-grid; place-items:center; width:17px; height:17px; margin-right:3px; border-radius:50%; color:#fff; font:700 var(--text-10)/1 Arial,sans-serif; font-style:normal; vertical-align:-1px; }
+.bus-green { background:#2ebd5b; }
+.bus-blue { margin-left:5px; background:#2696d6; }
 .gift-section { position:relative; z-index:4; padding:76px 24px 82px; text-align:center; background:#f8f7f5; }
 .gift-line { display:block; width:54px; height:1px; margin:0 auto 62px; background:#37322f; }
 .gift-section h2 { margin:0 0 12px; font-size:var(--text-16); font-weight:500; letter-spacing:.04em; }
