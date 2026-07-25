@@ -179,17 +179,17 @@ button { font:inherit; }
 .wedding-card::before { content:""; position:absolute; inset:16% 14%; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 34%,rgba(181,145,126,.025) 72%,transparent); }
 .wedding-card > * { position:relative; z-index:1; }
 .wedding-day.reveal-pending .wedding-card { opacity:0; transform:translate3d(0,190px,0) rotateX(4deg) scale(.965); }
-.wedding-day.is-visible .wedding-card { animation:wedding-rise 2.05s cubic-bezier(.16,.62,.18,1) both; }
+.wedding-day.is-visible .wedding-card { animation:wedding-rise 2.05s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
 .family-section.reveal-pending > *,
 .location-section.reveal-pending > *,
 .closing.reveal-pending > * { opacity:0; transform:translate3d(0,125px,0); }
 .family-section.is-visible > *,
 .location-section.is-visible > *,
-.closing.is-visible > * { animation:section-rise 1.55s cubic-bezier(.16,.62,.18,1) both; }
+.closing.is-visible > * { animation:section-rise 1.55s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
 .gallery-panel.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); }
-.gallery-panel.is-visible { animation:gallery-rise 1.55s cubic-bezier(.16,.62,.18,1) both; }
+.gallery-panel.is-visible { animation:gallery-rise 1.55s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
 .gift-section.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); }
-.gift-section.is-visible { animation:gallery-rise 1.55s cubic-bezier(.16,.62,.18,1) both; }
+.gift-section.is-visible { animation:gallery-rise 1.55s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
 .wedding-card,
 .family-section.reveal-pending > *,
 .location-section.reveal-pending > *,
@@ -207,6 +207,9 @@ button { font:inherit; }
 .language-divider span { width:44px; height:1px; background:#d9c8bf; }
 .language-divider em { width:28px; height:28px; border:1px solid #d7bfb5; border-radius:50%; font:400 var(--text-14)/26px Georgia,serif; }
 .date-block-yue { font-family:"Noto Serif HK","Noto Serif KR",serif; }
+.wedding-countdown { margin-top:23px; padding-top:18px; border-top:1px solid rgba(173,125,114,.25); text-align:center; }
+.wedding-countdown p { margin:0; color:#8b6d65; font-size:var(--text-12); line-height:1.7; letter-spacing:.025em; }
+.wedding-countdown p + p { color:#7b6e68; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-11); }
 .closing { padding:72px 24px 85px; color:#eee4dc; text-align:center; background:#322823; }
 .closing p { margin:0 0 12px; font:500 var(--text-9)/1 Arial,sans-serif; letter-spacing:.34em; }
 .closing span { display:inline-block; font-size:var(--text-13); font-weight:300; letter-spacing:.05em; }

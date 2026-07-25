@@ -101,6 +101,8 @@ const revealSections = document.querySelectorAll(
 );
 
 let revealTicking = false;
+let nextRevealAt = 0;
+const revealGap = 320;
 
 function updateRevealSections() {
   const viewportHeight = window.innerHeight;
@@ -113,7 +115,13 @@ function updateRevealSections() {
     const showThreshold = Math.min(rect.height * 0.08, 64);
 
     if (visibleHeight >= showThreshold) {
-      section.classList.add("is-visible");
+      if (!section.classList.contains("is-visible")) {
+        const now = Date.now();
+        const delay = Math.max(0, nextRevealAt - now);
+        section.style.setProperty("--reveal-delay", `${delay}ms`);
+        nextRevealAt = now + delay + revealGap;
+        section.classList.add("is-visible");
+      }
       if (section.matches(".gallery-panel, .gift-section")) {
         section.dataset.revealComplete = "true";
       }
@@ -137,6 +145,32 @@ requestAnimationFrame(() => requestAnimationFrame(updateRevealSections));
 window.addEventListener("scroll", requestRevealUpdate, { passive: true });
 window.addEventListener("resize", requestRevealUpdate, { passive: true });
 window.addEventListener("pageshow", requestRevealUpdate);
+
+const weddingCountdownKo = document.querySelector("#wedding-countdown-ko");
+const weddingCountdownYue = document.querySelector("#wedding-countdown-yue");
+
+function updateWeddingCountdown() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const weddingDay = new Date(2026, 10, 22);
+  const daysLeft = Math.round((weddingDay - today) / 86400000);
+
+  if (daysLeft > 0) {
+    weddingCountdownKo.textContent = `결혼식까지 D-${daysLeft}일`;
+    weddingCountdownYue.textContent = `距離婚禮尚餘 D-${daysLeft}日`;
+  } else if (daysLeft === 0) {
+    weddingCountdownKo.textContent = "오늘, 저희 결혼합니다";
+    weddingCountdownYue.textContent = "今天，我們結婚了";
+  } else {
+    const daysAfter = Math.abs(daysLeft);
+    weddingCountdownKo.textContent = `결혼식 후 D+${daysAfter}일`;
+    weddingCountdownYue.textContent = `婚禮後 D+${daysAfter}日`;
+  }
+}
+
+updateWeddingCountdown();
+setInterval(updateWeddingCountdown, 3600000);
+
 function warmUpScrollContent() {
   document.querySelectorAll(".photo-button img").forEach((image) => {
     if (typeof image.decode === "function") image.decode().catch(() => {});
