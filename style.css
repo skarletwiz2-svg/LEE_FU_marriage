@@ -139,8 +139,9 @@ button { font:inherit; }
 .bus-stop:last-child { padding-bottom:0; border-bottom:0; }
 .transport-list .bus-stop p { line-height:1.75; word-break:keep-all; }
 .transport-list .bus-stop-ko { margin:0; }
-.transport-list .bus-stop-yue { margin:6px 0 0; color:#7b716b; }
 .bus-stop strong { color:#4b4541; font-weight:500; }
+.bus-stop strong b, .village-yue { margin-left:5px; color:#766d67; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-weight:400; }
+.village-yue { display:inline; font-size:inherit; }
 .bus-stop strong span { display:inline-block; margin-right:6px; padding:2px 6px; border-radius:4px; color:#fff; background:#888581; font-family:Arial,sans-serif; font-size:var(--text-10); line-height:1.25; letter-spacing:0; vertical-align:1px; }
 .bus-stop em { display:inline-grid; place-items:center; width:17px; height:17px; margin-right:3px; border-radius:50%; color:#fff; font:700 var(--text-10)/1 Arial,sans-serif; font-style:normal; vertical-align:-1px; }
 .bus-green { background:#2ebd5b; }
