@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260725-37">
+  <link rel="stylesheet" href="style.css?v=20260726-38">
 </head>
 <body>
   <main class="invitation">
@@ -193,6 +193,64 @@
       </div>
     </section>
 
+    <section class="gift-section" aria-labelledby="gift-title">
+      <span class="gift-line" aria-hidden="true"></span>
+      <h2 id="gift-title">마음 전하실 곳</h2>
+      <p class="gift-message">참석이 어려우신 분들을 위해 알려드립니다.<br>축하를 보내주신 따뜻한 마음에 감사드립니다.</p>
+
+      <div class="gift-accordion">
+        <button class="gift-toggle" type="button" aria-expanded="false" aria-controls="gift-accounts">
+          <span>마음 전하실 곳</span>
+          <i aria-hidden="true"></i>
+        </button>
+        <div class="gift-accounts" id="gift-accounts" hidden>
+          <article class="account-card">
+            <p class="account-info">
+              <span class="account-name">이상경 <strong lang="zh-HK">李相卿</strong></span>
+              <span class="account-number">국민은행 938002-00-073437</span>
+            </p>
+            <button class="copy-account" type="button" data-account="938002-00-073437" data-feedback="계좌번호가 복사되었습니다">
+              <span>계좌번호 복사하기</span><span class="account-copy-icon" aria-hidden="true"></span>
+            </button>
+            <p class="account-feedback" role="status" aria-live="polite"></p>
+          </article>
+
+          <article class="account-card">
+            <p class="account-info">
+              <span class="account-name">푸윙칭 <strong lang="zh-HK">符詠晴</strong></span>
+              <span class="account-number">하나은행 391-911310-70207</span>
+            </p>
+            <button class="copy-account" type="button" data-account="391-911310-70207" data-feedback="계좌번호가 복사되었습니다">
+              <span>계좌번호 복사하기</span><span class="account-copy-icon" aria-hidden="true"></span>
+            </button>
+            <p class="account-feedback" role="status" aria-live="polite"></p>
+          </article>
+
+          <article class="account-card">
+            <p class="account-info">
+              <span class="account-name">이보춘 <strong lang="zh-HK">李保春</strong></span>
+              <span class="account-number">신한은행 <em>추후 안내</em></span>
+            </p>
+            <button class="copy-account" type="button" data-account="" data-feedback="계좌번호는 추후 안내됩니다">
+              <span>계좌번호 복사하기</span><span class="account-copy-icon" aria-hidden="true"></span>
+            </button>
+            <p class="account-feedback" role="status" aria-live="polite"></p>
+          </article>
+
+          <article class="account-card">
+            <p class="account-info">
+              <span class="account-name">김혜영 <strong lang="zh-HK">金惠英</strong></span>
+              <span class="account-number">신한은행 110-077-729811</span>
+            </p>
+            <button class="copy-account" type="button" data-account="110-077-729811" data-feedback="계좌번호가 복사되었습니다">
+              <span>계좌번호 복사하기</span><span class="account-copy-icon" aria-hidden="true"></span>
+            </button>
+            <p class="account-feedback" role="status" aria-live="polite"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <footer class="closing">
       <p>WITH LOVE</p>
       <span>소중한 발걸음을 기다리겠습니다</span>
@@ -206,6 +264,6 @@
     <div class="lightbox-count" aria-live="polite"></div>
   </div>
 
-  <script src="script.js?v=20260725-23"></script>
+  <script src="script.js?v=20260726-24"></script>
 </body>
 </html>

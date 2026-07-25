@@ -97,7 +97,7 @@ if ("IntersectionObserver" in window) {
 }
 
 const revealSections = document.querySelectorAll(
-  ".family-section, .wedding-day, .gallery-panel, .location-section, .closing"
+  ".family-section, .wedding-day, .gallery-panel, .location-section, .gift-section, .closing"
 );
 
 let revealTicking = false;
@@ -114,7 +114,7 @@ function updateRevealSections() {
 
     if (visibleHeight >= showThreshold) {
       section.classList.add("is-visible");
-      if (section.matches(".gallery-panel")) {
+      if (section.matches(".gallery-panel, .gift-section")) {
         section.dataset.revealComplete = "true";
       }
     } else if (rect.bottom <= 0 || rect.top >= viewportHeight) {
@@ -172,6 +172,44 @@ async function copyVenueAddress(event) {
 }
 
 copyAddressButtons.forEach((button) => button.addEventListener("click", copyVenueAddress));
+
+const giftToggle = document.querySelector(".gift-toggle");
+const giftAccounts = document.querySelector(".gift-accounts");
+
+giftToggle.addEventListener("click", () => {
+  const willOpen = giftToggle.getAttribute("aria-expanded") !== "true";
+  giftToggle.setAttribute("aria-expanded", String(willOpen));
+  giftAccounts.hidden = !willOpen;
+});
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (error) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.top = "0";
+    textarea.style.left = "-9999px";
+    textarea.setAttribute("readonly", "");
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, text.length);
+    document.execCommand("copy");
+    textarea.remove();
+  }
+}
+
+document.querySelectorAll(".copy-account").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const account = button.dataset.account;
+    const feedback = button.parentElement.querySelector(".account-feedback");
+    if (account) await copyText(account);
+    feedback.textContent = button.dataset.feedback;
+    clearTimeout(button.feedbackTimer);
+    button.feedbackTimer = setTimeout(() => { feedback.textContent = ""; }, 1800);
+  });
+});
 
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");

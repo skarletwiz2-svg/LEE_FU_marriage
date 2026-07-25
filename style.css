@@ -134,6 +134,34 @@ button { font:inherit; }
 .transport-list h3.transport-yue { margin:-5px 0 12px; color:#554d48; font-size:var(--text-14); }
 .transport-list p.transport-yue { color:#746b65; font-size:var(--text-13); }
 .transport-list .transport-placeholder { color:#aaa09a; }
+.gift-section { position:relative; z-index:4; padding:76px 24px 82px; text-align:center; background:#f8f7f5; }
+.gift-line { display:block; width:54px; height:1px; margin:0 auto 62px; background:#37322f; }
+.gift-section h2 { margin:0 0 12px; font-size:var(--text-16); font-weight:500; letter-spacing:.04em; }
+.gift-message { margin:0; color:#89837e; font-size:var(--text-13); line-height:1.85; word-break:keep-all; }
+.gift-accordion { margin:38px auto 0; overflow:hidden; border-radius:11px; background:#fff; box-shadow:0 4px 11px rgba(37,31,28,.14); text-align:left; }
+.gift-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:58px; padding:0 17px; border:0; color:#403936; background:#fff; font-size:var(--text-13); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.gift-toggle i { position:relative; width:12px; height:12px; flex:0 0 12px; transition:transform .3s ease; }
+.gift-toggle i::before, .gift-toggle i::after { content:""; position:absolute; top:5px; width:8px; height:1px; background:#9a938e; }
+.gift-toggle i::before { left:0; transform:rotate(45deg); }
+.gift-toggle i::after { right:0; transform:rotate(-45deg); }
+.gift-toggle[aria-expanded="true"] i { transform:rotate(180deg); }
+.gift-accounts { padding:13px 11px 14px; border-top:1px solid #e9e5e2; background:#f2f1ef; }
+.gift-accounts[hidden] { display:none; }
+.account-card { padding:20px 16px 15px; border-radius:11px; background:#fff; box-shadow:0 3px 9px rgba(37,31,28,.11); }
+.account-card + .account-card { margin-top:9px; }
+.account-info { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:10px; margin:0 0 18px; font-size:var(--text-12); line-height:1.55; }
+.account-name { white-space:nowrap; }
+.account-name strong { margin-left:3px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-weight:400; }
+.account-number { min-width:0; text-align:right; word-break:keep-all; }
+.account-number em { color:#aaa19b; font-style:normal; }
+.copy-account { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:39px; padding:0 14px; border:0; border-radius:7px; color:#fff; background:#777574; font-size:var(--text-11); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.copy-account:active { transform:scale(.985); background:#666463; }
+.account-copy-icon { position:relative; width:18px; height:18px; color:#fff; }
+.account-copy-icon::before, .account-copy-icon::after { content:""; position:absolute; width:9px; height:11px; border:1px solid currentColor; border-radius:2px; }
+.account-copy-icon::before { top:1px; left:2px; }
+.account-copy-icon::after { top:5px; left:6px; background:#777574; }
+.account-feedback { min-height:0; margin:0; color:#a17368; text-align:center; font-size:var(--text-10); transition:min-height .2s ease,margin .2s ease; }
+.account-feedback:not(:empty) { min-height:14px; margin-top:8px; }
 .wedding-day { position:relative; padding:74px 16px 82px; text-align:center; background:#e9ded2; border-top:1px solid #d8c7bc; border-bottom:1px solid #d8c7bc; overflow:hidden; perspective:900px; }
 .wedding-card { position:relative; display:flex; flex-direction:column; justify-content:center; aspect-ratio:941/1672; padding:76px 48px; background:#e9ded2 url("images/lace-paper-transparent.webp?v=20260725-3") center/100% 100% no-repeat; opacity:1; transform:none; transform-origin:center bottom; }
 .wedding-card::before { content:""; position:absolute; inset:16% 14%; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 34%,rgba(181,145,126,.025) 72%,transparent); }
@@ -148,11 +176,14 @@ button { font:inherit; }
 .closing.is-visible > * { animation:section-rise 1.55s cubic-bezier(.16,.62,.18,1) both; }
 .gallery-panel.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); }
 .gallery-panel.is-visible { animation:gallery-rise 1.55s cubic-bezier(.16,.62,.18,1) both; }
+.gift-section.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); }
+.gift-section.is-visible { animation:gallery-rise 1.55s cubic-bezier(.16,.62,.18,1) both; }
 .wedding-card,
 .family-section.reveal-pending > *,
 .location-section.reveal-pending > *,
 .closing.reveal-pending > *,
-.gallery-panel.reveal-pending { -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform,opacity; }
+.gallery-panel.reveal-pending,
+.gift-section.reveal-pending { -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform,opacity; }
 .section-kicker { margin:0 0 11px; color:var(--accent); font:600 var(--text-8)/1 Arial,sans-serif; letter-spacing:.3em; }
 .wedding-day h2 { margin:0; font:400 var(--text-27)/1.3 Georgia,serif; letter-spacing:.12em; }
 .day-ornament { display:block; margin:20px 0 27px; color:#bc9186; font-size:var(--text-11); }
@@ -167,7 +198,7 @@ button { font:inherit; }
 .closing { padding:72px 24px 85px; color:#eee4dc; text-align:center; background:#322823; }
 .closing p { margin:0 0 12px; font:500 var(--text-9)/1 Arial,sans-serif; letter-spacing:.34em; }
 .closing span { display:inline-block; font-size:var(--text-13); font-weight:300; letter-spacing:.05em; }
-.family-section, .wedding-day, .location-section, .closing { contain:paint; }
+.family-section, .wedding-day, .location-section, .gift-section, .closing { contain:paint; }
 .lightbox[hidden] { display:none; }
 .lightbox { position:fixed; z-index:20; inset:0; display:grid; place-items:center; background:#0d0c0b; animation:fade-in .25s ease both; }
 .lightbox-backdrop { position:absolute; inset:0; width:100%; border:0; background:transparent; }
