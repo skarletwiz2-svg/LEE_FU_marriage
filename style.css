@@ -99,7 +99,7 @@ button { font:inherit; }
 .location-section { padding:78px 20px 72px; text-align:center; background:#f2efeb; }
 .location-section h2 { margin:0 0 27px; font:400 30px/1.2 Georgia,serif; letter-spacing:.12em; }
 .venue-name { margin:0 0 7px; font-size:18px; font-weight:500; }
-.venue-phone { color:#8e6f67; font-size:13px; text-decoration:none; }
+.venue-phone { display:inline-block; color:#8e6f67; font-size:13px; text-decoration:none; }
 .address-row { position:relative; width:100%; margin:12px auto 0; text-align:center; }
 .address-row-en { margin-top:5px; }
 .venue-address { margin:0; color:#726a64; font-size:13px; line-height:1.8; }
@@ -124,8 +124,8 @@ button { font:inherit; }
 .transport-list p.transport-yue { color:#746b65; font-size:13px; }
 .transport-list .transport-placeholder { color:#aaa09a; }
 .wedding-day { position:relative; padding:74px 16px 82px; text-align:center; background:#e9ded2; border-top:1px solid #d8c7bc; border-bottom:1px solid #d8c7bc; overflow:hidden; perspective:900px; }
-.wedding-card { position:relative; min-height:560px; padding:88px 48px 78px; background:#fcf8f1 url("images/lace-frame.svg?v=20260725-1") center/100% 100% no-repeat; filter:drop-shadow(0 18px 22px rgba(91,65,52,.18)); opacity:1; transform:none; transform-origin:center bottom; }
-.wedding-card::before { content:""; position:absolute; inset:50px; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.26),transparent 32%,rgba(181,145,126,.035) 73%,transparent); }
+.wedding-card { position:relative; display:flex; flex-direction:column; justify-content:center; aspect-ratio:941/1672; padding:76px 48px; background:#f8eee0 url("images/lace-paper-texture.webp?v=20260725-1") center/100% 100% no-repeat; filter:drop-shadow(0 18px 22px rgba(91,65,52,.2)); opacity:1; transform:none; transform-origin:center bottom; }
+.wedding-card::before { content:""; position:absolute; inset:16% 14%; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 34%,rgba(181,145,126,.025) 72%,transparent); }
 .wedding-card > * { position:relative; z-index:1; }
 .wedding-day.reveal-pending .wedding-card { opacity:0; transform:translate3d(0,190px,0) rotateX(4deg) scale(.965); }
 .wedding-day.is-visible .wedding-card { opacity:1; transform:translate3d(0,0,0) rotateX(0) scale(1); transition:opacity 1.65s ease,transform 2.05s cubic-bezier(.16,.62,.18,1); }
