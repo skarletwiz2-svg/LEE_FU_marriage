@@ -72,7 +72,7 @@ if (weddingDay && "IntersectionObserver" in window) {
     if (!entry.isIntersecting) return;
     weddingDay.classList.add("is-visible");
     observer.unobserve(weddingDay);
-  }, { threshold: 0.22 });
+  }, { threshold: 0.08 });
   weddingObserver.observe(weddingDay);
 }
 
