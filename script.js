@@ -65,6 +65,17 @@ if ("IntersectionObserver" in window) {
   heroObserver.observe(hero);
 }
 
+const weddingDay = document.querySelector(".wedding-day");
+if (weddingDay && "IntersectionObserver" in window) {
+  weddingDay.classList.add("reveal-pending");
+  const weddingObserver = new IntersectionObserver(([entry], observer) => {
+    if (!entry.isIntersecting) return;
+    weddingDay.classList.add("is-visible");
+    observer.unobserve(weddingDay);
+  }, { threshold: 0.22 });
+  weddingObserver.observe(weddingDay);
+}
+
 function warmUpScrollContent() {
   document.querySelectorAll(".photo-button img").forEach((image) => {
     if (typeof image.decode === "function") image.decode().catch(() => {});
