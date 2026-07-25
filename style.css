@@ -208,8 +208,8 @@ button { font:inherit; }
 .language-divider em { width:28px; height:28px; border:1px solid #d7bfb5; border-radius:50%; font:400 var(--text-14)/26px Georgia,serif; }
 .date-block-yue { font-family:"Noto Serif HK","Noto Serif KR",serif; }
 .wedding-countdown { margin-top:23px; padding-top:18px; border-top:1px solid rgba(173,125,114,.25); text-align:center; }
-.wedding-countdown p { margin:0; color:#8b6d65; font-size:var(--text-12); line-height:1.7; letter-spacing:.025em; }
-.wedding-countdown p + p { color:#7b6e68; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-11); }
+.wedding-countdown p { margin:0; color:#8b6d65; font-size:var(--text-16); line-height:1.7; letter-spacing:.025em; }
+.wedding-countdown p + p { color:#7b6e68; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-16); }
 .closing { padding:72px 24px 85px; color:#eee4dc; text-align:center; background:#322823; }
 .closing p { margin:0 0 12px; font:500 var(--text-9)/1 Arial,sans-serif; letter-spacing:.34em; }
 .closing span { display:inline-block; font-size:var(--text-13); font-weight:300; letter-spacing:.05em; }
