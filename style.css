@@ -166,7 +166,7 @@ button { font:inherit; }
 .account-name strong { margin-left:3px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-weight:400; }
 .account-number { min-width:0; text-align:right; word-break:keep-all; }
 .account-number em { color:#aaa19b; font-style:normal; }
-.copy-account { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:39px; padding:0 14px; border:0; border-radius:7px; color:#fff; background:#777574; font-size:var(--text-11); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.copy-account { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:39px; padding:0 14px; border:0; border-radius:7px; outline:0; color:#fff; background:#777574; box-shadow:none; font-size:var(--text-11); cursor:pointer; -webkit-appearance:none; appearance:none; -webkit-tap-highlight-color:transparent; }
 .copy-account:active { transform:scale(.985); background:#666463; }
 .account-copy-icon { position:relative; width:18px; height:18px; color:#fff; }
 .account-copy-icon::before, .account-copy-icon::after { content:""; position:absolute; width:9px; height:11px; border:1px solid currentColor; border-radius:2px; }
