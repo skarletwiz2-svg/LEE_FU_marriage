@@ -135,6 +135,7 @@ button { font:inherit; }
 .date-block p { margin:0; }
 .date-block .date { font-size:16px; font-weight:400; line-height:1.8; }
 .date-block .place { margin-top:6px; color:#5f5751; font-size:14px; }
+.date-block-yue .date { font-size:14px; letter-spacing:-.015em; white-space:nowrap; }
 .language-divider { display:flex; align-items:center; justify-content:center; gap:13px; margin:36px auto; color:#ad7d72; }
 .language-divider span { width:44px; height:1px; background:#d9c8bf; }
 .language-divider em { width:28px; height:28px; border:1px solid #d7bfb5; border-radius:50%; font:400 14px/26px Georgia,serif; }
