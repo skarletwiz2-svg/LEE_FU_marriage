@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260726-49">
+  <link rel="stylesheet" href="style.css?v=20260726-50">
 </head>
 <body>
   <audio id="background-music" preload="auto" autoplay loop playsinline>
@@ -219,6 +219,53 @@
       </div>
     </section>
 
+    <section class="guestbook-section" aria-labelledby="guestbook-title">
+      <p class="section-kicker">WORDS FROM OUR GUESTS</p>
+      <h2 id="guestbook-title">MESSAGE</h2>
+      <p class="guestbook-subtitle">저희 둘에게 따뜻한 방명록을 남겨주세요</p>
+      <p class="guestbook-subtitle guestbook-subtitle-yue" lang="zh-HK">請為我們留下溫暖的祝福</p>
+
+      <div class="guestbook-list" aria-live="polite"></div>
+      <p class="guestbook-status" role="status" aria-live="polite">방명록을 불러오는 중입니다.</p>
+
+      <div class="guestbook-actions">
+        <button class="guestbook-more" type="button" hidden>전체 보기</button>
+        <button class="guestbook-write" type="button">메시지 남기기</button>
+        <button class="guestbook-admin" type="button">관리자 삭제</button>
+      </div>
+    </section>
+
+    <div class="guestbook-modal" role="dialog" aria-modal="true" aria-labelledby="guestbook-modal-title" hidden>
+      <button class="guestbook-modal-backdrop" type="button" aria-label="방명록 창 닫기"></button>
+      <div class="guestbook-modal-card">
+        <button class="guestbook-modal-close" type="button" aria-label="방명록 창 닫기">×</button>
+        <h2 id="guestbook-modal-title">축하 메시지 작성하기</h2>
+        <p>저희 둘의 결혼을 함께 축하해 주세요</p>
+        <form class="guestbook-form">
+          <input id="guestbook-name" name="name" type="text" maxlength="20" autocomplete="name" placeholder="성함을 남겨주세요" required>
+          <input id="guestbook-password" name="password" type="password" minlength="4" maxlength="30" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요" required>
+          <textarea id="guestbook-message" name="message" maxlength="200" placeholder="200자 이내로 작성해 주세요" required></textarea>
+          <span class="guestbook-counter">0 / 200</span>
+          <p class="guestbook-form-status" role="status" aria-live="polite"></p>
+          <button class="guestbook-submit" type="submit">작성 완료</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="guestbook-password-modal" role="dialog" aria-modal="true" aria-labelledby="guestbook-password-title" hidden>
+      <button class="guestbook-modal-backdrop" type="button" aria-label="비밀번호 확인 창 닫기"></button>
+      <div class="guestbook-modal-card guestbook-password-card">
+        <button class="guestbook-password-close" type="button" aria-label="비밀번호 확인 창 닫기">×</button>
+        <h2 id="guestbook-password-title">비밀번호 확인</h2>
+        <p class="guestbook-password-description">작성할 때 입력한 비밀번호를 입력해 주세요.</p>
+        <form class="guestbook-password-form">
+          <input id="guestbook-action-password" name="password" type="password" maxlength="30" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요" required>
+          <p class="guestbook-password-status" role="status" aria-live="polite"></p>
+          <button class="guestbook-password-submit" type="submit">확인</button>
+        </form>
+      </div>
+    </div>
+
     <section class="gift-section" aria-labelledby="gift-title">
       <span class="gift-line" aria-hidden="true"></span>
       <h2 id="gift-title">마음 전하실 곳</h2>
@@ -290,6 +337,12 @@
     <div class="lightbox-count" aria-live="polite"></div>
   </div>
 
-  <script src="script.js?v=20260726-29"></script>
+  <script>
+    window.GUESTBOOK_CONFIG = {
+      url: "https://lidvlgqirxaaorsjrmgo.supabase.co",
+      key: "sb_publishable_6Pf_BnGnkVx6vGYldJFJmA_uow9vVuu"
+    };
+  </script>
+  <script src="script.js?v=20260726-30"></script>
 </body>
 </html>
