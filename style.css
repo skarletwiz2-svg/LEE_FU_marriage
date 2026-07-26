@@ -14,6 +14,9 @@ html,body { margin:0; min-height:100%; background:#171513; }
 body { color:var(--ink); font-family:"Noto Serif KR","Batang","Times New Roman",serif; }
 html.intro-locked { --hero-height:100dvh !important; height:100%; overflow:hidden; overscroll-behavior:none; }
 body.intro-locked { position:fixed; inset:0; width:100%; height:100%; overflow:hidden; overscroll-behavior:none; touch-action:none; }
+html.intro-unlocked,
+body.intro-unlocked { overflow-x:hidden; overflow-y:auto; overscroll-behavior-y:auto; touch-action:pan-y; }
+body.intro-unlocked { position:static; inset:auto; width:100%; height:auto; -webkit-overflow-scrolling:touch; }
 button { font:inherit; }
 .music-toggle { position:fixed; z-index:40; right:max(16px,calc((100vw - 520px)/2 + 16px)); bottom:max(16px,env(safe-area-inset-bottom)); display:grid; place-items:center; width:42px; height:42px; padding:0; border:1px solid rgba(255,255,255,.55); border-radius:50%; color:#fff; background:rgba(48,39,34,.62); box-shadow:0 4px 14px rgba(0,0,0,.18); font:400 20px/1 Georgia,serif; cursor:pointer; -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); -webkit-tap-highlight-color:transparent; }
 .music-toggle.is-playing span { animation:music-pulse 1.7s ease-in-out infinite; }
@@ -88,6 +91,10 @@ button { font:inherit; }
 .invitation.intro-finished .petals i { animation:none; will-change:auto; }
 .invitation.intro-finished .intro { opacity:0; transform:translateY(-12px); }
 .invitation.intro-finished .petals { opacity:0; visibility:hidden; }
+.invitation.intro-finished .intro,
+.invitation.intro-finished .story,
+.invitation.intro-finished .petals,
+.invitation.intro-finished .scroll-cue { pointer-events:none; }
 .family-section { position:relative; z-index:4; padding:76px 25px 70px; text-align:center; background:#f8f4ee; }
 .family-section h2 { margin:0; font-size:var(--text-22); font-weight:400; line-height:1.75; letter-spacing:.03em; }
 .family-list { margin:42px auto 0; }
