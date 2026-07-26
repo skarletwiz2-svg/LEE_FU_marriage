@@ -510,8 +510,21 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
     }
   }
 
+  let pageScrollPosition = 0;
+
   function setPageModalOpen(open) {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      pageScrollPosition = window.scrollY;
+      document.documentElement.classList.add("guestbook-modal-open");
+      document.body.classList.add("guestbook-modal-open");
+      document.body.style.top = `-${pageScrollPosition}px`;
+      return;
+    }
+
+    document.documentElement.classList.remove("guestbook-modal-open");
+    document.body.classList.remove("guestbook-modal-open");
+    document.body.style.top = "";
+    window.scrollTo(0, pageScrollPosition);
   }
 
   function openGuestbookEditor(item = null) {
