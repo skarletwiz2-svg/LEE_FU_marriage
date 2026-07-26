@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260726-51">
+  <link rel="stylesheet" href="style.css?v=20260726-52">
 </head>
 <body>
   <audio id="background-music" preload="auto" autoplay loop playsinline>
@@ -242,15 +242,15 @@
       <button class="guestbook-modal-backdrop" type="button" aria-label="방명록 창 닫기"></button>
       <div class="guestbook-modal-card">
         <button class="guestbook-modal-close" type="button" aria-label="방명록 창 닫기">×</button>
-        <h2 id="guestbook-modal-title">축하 메시지 작성하기</h2>
-        <p>저희 둘의 결혼을 함께 축하해 주세요</p>
+        <h2 id="guestbook-modal-title"><span>축하 메시지 작성하기</span><small lang="zh-HK">撰寫祝福留言</small></h2>
+        <p><span>저희 둘의 결혼을 함께 축하해 주세요</span><small lang="zh-HK">請一同祝福我們的婚姻</small></p>
         <form class="guestbook-form">
-          <input id="guestbook-name" name="name" type="text" maxlength="20" autocomplete="name" placeholder="성함을 남겨주세요" required>
-          <input id="guestbook-password" name="password" type="password" minlength="4" maxlength="30" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요" required>
-          <textarea id="guestbook-message" name="message" maxlength="200" placeholder="200자 이내로 작성해 주세요" required></textarea>
+          <input id="guestbook-name" name="name" type="text" maxlength="20" autocomplete="name" placeholder="성함을 남겨주세요 / 請留下姓名" required>
+          <input id="guestbook-password" name="password" type="password" minlength="4" maxlength="30" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요 / 請輸入密碼" required>
+          <textarea id="guestbook-message" name="message" maxlength="200" placeholder="200자 이내로 작성해 주세요 / 請於200字內填寫" required></textarea>
           <span class="guestbook-counter">0 / 200</span>
           <p class="guestbook-form-status" role="status" aria-live="polite"></p>
-          <button class="guestbook-submit" type="submit">작성 완료</button>
+          <button class="guestbook-submit" type="submit"><span>작성 완료</span><small lang="zh-HK">完成留言</small></button>
         </form>
       </div>
     </div>
@@ -259,12 +259,12 @@
       <button class="guestbook-modal-backdrop" type="button" aria-label="비밀번호 확인 창 닫기"></button>
       <div class="guestbook-modal-card guestbook-password-card">
         <button class="guestbook-password-close" type="button" aria-label="비밀번호 확인 창 닫기">×</button>
-        <h2 id="guestbook-password-title">비밀번호 확인</h2>
-        <p class="guestbook-password-description">작성할 때 입력한 비밀번호를 입력해 주세요.</p>
+        <h2 id="guestbook-password-title"><span>비밀번호 확인</span><small lang="zh-HK">確認密碼</small></h2>
+        <p class="guestbook-password-description"><span>작성할 때 입력한 비밀번호를 입력해 주세요.</span><small lang="zh-HK">請輸入留言時設定的密碼</small></p>
         <form class="guestbook-password-form">
-          <input id="guestbook-action-password" name="password" type="password" maxlength="30" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요" required>
+          <input id="guestbook-action-password" name="password" type="password" maxlength="30" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요 / 請輸入密碼" required>
           <p class="guestbook-password-status" role="status" aria-live="polite"></p>
-          <button class="guestbook-password-submit" type="submit">확인</button>
+          <button class="guestbook-password-submit" type="submit"><span>확인</span><small lang="zh-HK">確認</small></button>
         </form>
       </div>
     </div>
@@ -346,6 +346,6 @@
       key: "sb_publishable_6Pf_BnGnkVx6vGYldJFJmA_uow9vVuu"
     };
   </script>
-  <script src="script.js?v=20260726-31"></script>
+  <script src="script.js?v=20260726-32"></script>
 </body>
 </html>
