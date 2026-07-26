@@ -18,10 +18,24 @@ function updateMusicButton() {
 }
 
 function playBackgroundMusic() {
-  if (musicManuallyPaused || !backgroundMusic.paused) return;
+  if (document.hidden || musicManuallyPaused || !backgroundMusic.paused) return;
   const playRequest = backgroundMusic.play();
   if (playRequest) playRequest.then(updateMusicButton).catch(updateMusicButton);
 }
+
+function pauseMusicWhenLeavingPage() {
+  if (!backgroundMusic.paused) {
+    backgroundMusic.pause();
+  }
+  musicManuallyPaused = true;
+  updateMusicButton();
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) pauseMusicWhenLeavingPage();
+});
+window.addEventListener("pagehide", pauseMusicWhenLeavingPage);
+window.addEventListener("blur", pauseMusicWhenLeavingPage);
 
 backgroundMusic.volume = 0.55;
 backgroundMusic.addEventListener("play", updateMusicButton);
