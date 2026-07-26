@@ -251,6 +251,8 @@ const counter = document.querySelector(".lightbox-count");
 let currentPhotoIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
+let isSwipeTracking = false;
+let isPinchGesture = false;
 let isPhotoSwitching = false;
 
 function showPhoto(index) {
@@ -299,19 +301,43 @@ document.querySelector(".close-button").addEventListener("click", closeLightbox)
 document.querySelector(".lightbox-backdrop").addEventListener("click", closeLightbox);
 
 lightbox.addEventListener("touchstart", (event) => {
-  if (event.touches.length !== 1) return;
+  if (event.touches.length > 1) {
+    isPinchGesture = true;
+    isSwipeTracking = false;
+    return;
+  }
+  if (isPinchGesture || event.touches.length !== 1) return;
+  isSwipeTracking = true;
   touchStartX = event.touches[0].clientX;
   touchStartY = event.touches[0].clientY;
 }, { passive: true });
 
+lightbox.addEventListener("touchmove", (event) => {
+  if (event.touches.length > 1) {
+    isPinchGesture = true;
+    isSwipeTracking = false;
+  }
+}, { passive: true });
+
 lightbox.addEventListener("touchend", (event) => {
-  if (event.changedTouches.length !== 1) return;
+  if (isPinchGesture) {
+    if (event.touches.length === 0) isPinchGesture = false;
+    isSwipeTracking = false;
+    return;
+  }
+  if (!isSwipeTracking || event.changedTouches.length !== 1) return;
+  isSwipeTracking = false;
   const deltaX = event.changedTouches[0].clientX - touchStartX;
   const deltaY = event.changedTouches[0].clientY - touchStartY;
 
   if (Math.abs(deltaX) < 50 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
   const isNext = deltaX < 0;
   slideToPhoto(currentPhotoIndex + (isNext ? 1 : -1), isNext ? "next" : "previous");
+}, { passive: true });
+
+lightbox.addEventListener("touchcancel", () => {
+  isSwipeTracking = false;
+  isPinchGesture = false;
 }, { passive: true });
 
 document.addEventListener("keydown", (event) => {
