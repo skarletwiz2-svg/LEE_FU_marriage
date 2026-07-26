@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260726-50">
+  <link rel="stylesheet" href="style.css?v=20260726-51">
 </head>
 <body>
   <audio id="background-music" preload="auto" autoplay loop playsinline>
@@ -230,9 +230,12 @@
 
       <div class="guestbook-actions">
         <button class="guestbook-more" type="button" hidden>전체 보기</button>
-        <button class="guestbook-write" type="button">메시지 남기기</button>
-        <button class="guestbook-admin" type="button">관리자 삭제</button>
+        <button class="guestbook-write" type="button">
+          <span>메시지 남기기</span>
+          <small lang="zh-HK">留下祝福</small>
+        </button>
       </div>
+      <button class="guestbook-admin" type="button">관리</button>
     </section>
 
     <div class="guestbook-modal" role="dialog" aria-modal="true" aria-labelledby="guestbook-modal-title" hidden>
@@ -343,6 +346,6 @@
       key: "sb_publishable_6Pf_BnGnkVx6vGYldJFJmA_uow9vVuu"
     };
   </script>
-  <script src="script.js?v=20260726-30"></script>
+  <script src="script.js?v=20260726-31"></script>
 </body>
 </html>
