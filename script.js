@@ -494,7 +494,7 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
     guestbookStatus.textContent = guestbookMessages.length
       ? `총 ${guestbookMessages.length}개의 축하 메시지가 있습니다.`
       : "첫 번째 축하 메시지를 남겨주세요.";
-    guestbookAdmin.textContent = administratorMode ? "관리자 삭제 모드 종료" : "관리자 삭제";
+    guestbookAdmin.textContent = administratorMode ? "관리 종료" : "관리";
   }
 
   async function loadGuestbook() {
