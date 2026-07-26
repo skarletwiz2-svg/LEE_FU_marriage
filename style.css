@@ -14,6 +14,9 @@ html,body { margin:0; min-height:100%; background:#171513; }
 body { color:var(--ink); font-family:"Noto Serif KR","Batang","Times New Roman",serif; }
 body.intro-locked { overscroll-behavior:none; }
 button { font:inherit; }
+.music-toggle { position:fixed; z-index:40; right:max(16px,calc((100vw - 520px)/2 + 16px)); bottom:max(16px,env(safe-area-inset-bottom)); display:grid; place-items:center; width:42px; height:42px; padding:0; border:1px solid rgba(255,255,255,.55); border-radius:50%; color:#fff; background:rgba(48,39,34,.62); box-shadow:0 4px 14px rgba(0,0,0,.18); font:400 20px/1 Georgia,serif; cursor:pointer; -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); -webkit-tap-highlight-color:transparent; }
+.music-toggle.is-playing span { animation:music-pulse 1.7s ease-in-out infinite; }
+.music-toggle:not(.is-playing) { opacity:.72; }
 .invitation { position:relative; isolation:isolate; width:min(100%,520px); min-height:100svh; margin:0 auto; overflow:hidden; background:var(--paper); }
 .hero-photo { position:absolute; z-index:-4; top:0; left:0; width:100%; height:var(--hero-height); background:url("images/KJH02739-2-hero.jpg") center 34%/cover no-repeat; }
 .hero-blur { position:absolute; z-index:-3; top:0; left:0; width:100%; height:var(--hero-height); opacity:0; background:url("images/KJH02739-2-blur.jpg") center 34%/cover no-repeat; animation:blur-fade 10s 1.2s cubic-bezier(.2,.7,.2,1) forwards; will-change:opacity; }
@@ -246,6 +249,7 @@ button { font:inherit; }
 @keyframes reveal-scroll { to { opacity:1; } }
 @keyframes scroll-pulse { 0%,100% { opacity:.3; transform:scaleY(.55); transform-origin:top; } 50% { opacity:1; transform:scaleY(1); transform-origin:top; } }
 @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+@keyframes music-pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.18); } }
 @keyframes slide-out-left { to { opacity:0; transform:translateX(-28%); } }
 @keyframes slide-out-right { to { opacity:0; transform:translateX(28%); } }
 @keyframes slide-in-right { from { opacity:0; transform:translateX(28%); } to { opacity:1; transform:translateX(0); } }
