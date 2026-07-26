@@ -492,13 +492,13 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
     guestbookMore.hidden = guestbookMessages.length <= 3;
     guestbookMore.textContent = guestbookExpanded ? "간단히 보기" : "전체 보기";
     guestbookStatus.textContent = guestbookMessages.length
-      ? `총 ${guestbookMessages.length}개의 축하 메시지가 있습니다.`
-      : "첫 번째 축하 메시지를 남겨주세요.";
+      ? `총 ${guestbookMessages.length}개의 축하 메시지가 있습니다. / 共有 ${guestbookMessages.length}則祝福留言。`
+      : "첫 번째 축하 메시지를 남겨주세요. / 請留下第一則祝福留言。";
     guestbookAdmin.textContent = administratorMode ? "관리 종료" : "관리";
   }
 
   async function loadGuestbook() {
-    guestbookStatus.textContent = "방명록을 불러오는 중입니다.";
+    guestbookStatus.textContent = "방명록을 불러오는 중입니다. / 正在載入祝福留言。";
     try {
       guestbookMessages = await guestbookRpc("guestbook_list", {
         p_limit: 100,
@@ -506,7 +506,7 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
       }) || [];
       renderGuestbook();
     } catch (error) {
-      guestbookStatus.textContent = "방명록 데이터베이스 설정이 필요합니다.";
+      guestbookStatus.textContent = "방명록을 불러오지 못했습니다. / 無法載入祝福留言。";
     }
   }
 
@@ -516,8 +516,12 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
 
   function openGuestbookEditor(item = null) {
     guestbookEditId = item?.id || null;
-    guestbookModalTitle.textContent = item ? "축하 메시지 수정하기" : "축하 메시지 작성하기";
-    guestbookSubmit.textContent = item ? "수정 완료" : "작성 완료";
+    guestbookModalTitle.innerHTML = item
+      ? '<span>축하 메시지 수정하기</span><small lang="zh-HK">修改祝福留言</small>'
+      : '<span>축하 메시지 작성하기</span><small lang="zh-HK">撰寫祝福留言</small>';
+    guestbookSubmit.innerHTML = item
+      ? '<span>수정 완료</span><small lang="zh-HK">完成修改</small>'
+      : '<span>작성 완료</span><small lang="zh-HK">完成留言</small>';
     guestbookName.value = item?.author || "";
     guestbookPassword.value = "";
     guestbookMessage.value = item?.message || "";
@@ -540,10 +544,12 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
     passwordForm.reset();
     passwordStatus.textContent = "";
     const isAdmin = action === "admin-delete" || action === "admin-enable";
-    passwordTitle.textContent = isAdmin ? "관리자 비밀번호 확인" : "비밀번호 확인";
-    passwordDescription.textContent = isAdmin
-      ? "Supabase에서 설정한 관리자 비밀번호를 입력해 주세요."
-      : "작성할 때 입력한 비밀번호를 입력해 주세요.";
+    passwordTitle.innerHTML = isAdmin
+      ? '<span>관리자 비밀번호 확인</span><small lang="zh-HK">確認管理員密碼</small>'
+      : '<span>비밀번호 확인</span><small lang="zh-HK">確認密碼</small>';
+    passwordDescription.innerHTML = isAdmin
+      ? '<span>설정한 관리자 비밀번호를 입력해 주세요.</span><small lang="zh-HK">請輸入已設定的管理員密碼</small>'
+      : '<span>작성할 때 입력한 비밀번호를 입력해 주세요.</span><small lang="zh-HK">請輸入留言時設定的密碼</small>';
     passwordModal.hidden = false;
     setPageModalOpen(true);
     setTimeout(() => actionPassword.focus(), 50);
@@ -579,7 +585,9 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
   guestbookForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     guestbookSubmit.disabled = true;
-    guestbookFormStatus.textContent = guestbookEditId ? "메시지를 수정하고 있습니다." : "메시지를 남기고 있습니다.";
+    guestbookFormStatus.textContent = guestbookEditId
+      ? "메시지를 수정하고 있습니다. / 正在修改留言。"
+      : "메시지를 남기고 있습니다. / 正在提交留言。";
     try {
       const payload = {
         p_author: guestbookName.value.trim(),
@@ -596,7 +604,7 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
       await loadGuestbook();
     } catch (error) {
       guestbookFormStatus.textContent = error.message.includes("password")
-        ? "비밀번호가 일치하지 않습니다."
+        ? "비밀번호가 일치하지 않습니다. / 密碼不正確。"
         : error.message;
     } finally {
       guestbookSubmit.disabled = false;
@@ -608,7 +616,7 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
     const currentAction = passwordAction;
     const passwordSubmit = document.querySelector(".guestbook-password-submit");
     passwordSubmit.disabled = true;
-    passwordStatus.textContent = "확인하고 있습니다.";
+    passwordStatus.textContent = "확인하고 있습니다. / 正在確認。";
     try {
       if (currentAction.action === "delete") {
         await guestbookRpc("guestbook_delete", {
@@ -629,7 +637,7 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
       closePasswordModal();
       await loadGuestbook();
     } catch (error) {
-      passwordStatus.textContent = "비밀번호가 일치하지 않습니다.";
+      passwordStatus.textContent = "비밀번호가 일치하지 않습니다. / 密碼不正確。";
     } finally {
       passwordSubmit.disabled = false;
     }
