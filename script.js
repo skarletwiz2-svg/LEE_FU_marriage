@@ -531,7 +531,7 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
     guestbookEditId = item?.id || null;
     guestbookModalTitle.innerHTML = item
       ? '<span>축하 메시지 수정하기</span><small lang="zh-HK">修改祝福留言</small>'
-      : '<span>축하 메시지 작성하기</span><small lang="zh-HK">撰寫祝福留言</small>';
+      : '<span>축하 메시지 작성하기</span><small lang="zh-HK">歡迎留言祝福我們</small>';
     guestbookSubmit.innerHTML = item
       ? '<span>수정 완료</span><small lang="zh-HK">完成修改</small>'
       : '<span>작성 완료</span><small lang="zh-HK">完成留言</small>';
