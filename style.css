@@ -151,8 +151,8 @@ button { font:inherit; }
 .bus-blue { margin-left:5px; background:#2696d6; }
 .guestbook-section { position:relative; z-index:4; padding:78px 24px 94px; text-align:center; background:#efeeee; }
 .guestbook-section h2 { margin:0 0 12px; font:400 var(--text-30)/1.2 Georgia,serif; letter-spacing:.12em; }
-.guestbook-subtitle { margin:0; color:#8c8783; font-size:var(--text-13); line-height:1.7; }
-.guestbook-subtitle-yue { margin-top:2px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-12); }
+.guestbook-subtitle { margin:0; color:#8c8783; font-size:var(--text-14); line-height:1.7; }
+.guestbook-subtitle-yue { margin-top:2px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-13); }
 .guestbook-list { display:grid; gap:13px; margin:34px 10px 0; text-align:left; }
 .guestbook-card { position:relative; min-height:128px; padding:24px 21px 20px; border-radius:8px; background:#fff; box-shadow:0 7px 13px rgba(48,43,40,.14); }
 .guestbook-card-message { margin:0 22px 24px 0; color:#282421; font-size:var(--text-14); line-height:1.7; white-space:pre-wrap; overflow-wrap:anywhere; }
@@ -208,8 +208,8 @@ button { font:inherit; }
   margin-bottom:clamp(9px,2.35vw,12px);
   font-size:clamp(24px,5.9vw,30px);
 }
-.guestbook-subtitle { font-size:clamp(11px,2.55vw,13px); }
-.guestbook-subtitle-yue { font-size:clamp(10px,2.35vw,12px); }
+.guestbook-subtitle { font-size:clamp(13px,2.95vw,15px); }
+.guestbook-subtitle-yue { font-size:clamp(12px,2.75vw,14px); }
 .guestbook-list {
   gap:clamp(10px,2.55vw,13px);
   margin:clamp(26px,6.65vw,34px) clamp(0px,1.95vw,10px) 0;
@@ -255,11 +255,13 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
   border-radius:clamp(8px,1.95vw,10px);
 }
 .guestbook-modal-card h2 { margin-bottom:5px; font-size:clamp(15px,3.35vw,17px); }
-.guestbook-modal-card h2 small { margin-top:3px; font-size:clamp(11px,2.55vw,13px); }
+.guestbook-modal-card h2 small { margin-top:3px; font-size:clamp(13px,2.95vw,15px); }
 .guestbook-modal-card > p {
   margin-bottom:clamp(13px,3.7vw,19px);
-  font-size:clamp(10px,2.15vw,11px);
+  font-size:clamp(11px,2.55vw,13px);
+  line-height:1.55;
 }
+.guestbook-modal-card > p small { font-size:clamp(11px,2.55vw,13px); line-height:1.55; }
 .guestbook-form,
 .guestbook-password-form { gap:clamp(7px,1.7vw,9px); }
 .guestbook-form input,
