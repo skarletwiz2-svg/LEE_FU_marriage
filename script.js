@@ -144,7 +144,7 @@ if ("IntersectionObserver" in window) {
 }
 
 const revealSections = document.querySelectorAll(
-  ".family-section, .wedding-day, .gallery-panel, .location-section, .gift-section, .closing"
+  ".family-section, .wedding-day, .gallery-panel, .location-section, .guestbook-section, .gift-section, .closing"
 );
 
 let revealTicking = false;
@@ -169,7 +169,7 @@ function updateRevealSections() {
         nextRevealAt = now + delay + revealGap;
         section.classList.add("is-visible");
       }
-      if (section.matches(".gallery-panel, .gift-section")) {
+      if (section.matches(".gallery-panel, .guestbook-section, .gift-section")) {
         section.dataset.revealComplete = "true";
       }
     } else if (rect.bottom <= 0 || rect.top >= viewportHeight) {
@@ -392,3 +392,254 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft" && !lightbox.hidden) slideToPhoto(currentPhotoIndex - 1, "previous");
   if (event.key === "ArrowRight" && !lightbox.hidden) slideToPhoto(currentPhotoIndex + 1, "next");
 });
+
+const guestbookConfig = window.GUESTBOOK_CONFIG;
+const guestbookSection = document.querySelector(".guestbook-section");
+
+if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
+  const guestbookList = document.querySelector(".guestbook-list");
+  const guestbookStatus = document.querySelector(".guestbook-status");
+  const guestbookMore = document.querySelector(".guestbook-more");
+  const guestbookWrite = document.querySelector(".guestbook-write");
+  const guestbookAdmin = document.querySelector(".guestbook-admin");
+  const guestbookModal = document.querySelector(".guestbook-modal");
+  const guestbookForm = document.querySelector(".guestbook-form");
+  const guestbookModalTitle = document.querySelector("#guestbook-modal-title");
+  const guestbookName = document.querySelector("#guestbook-name");
+  const guestbookPassword = document.querySelector("#guestbook-password");
+  const guestbookMessage = document.querySelector("#guestbook-message");
+  const guestbookCounter = document.querySelector(".guestbook-counter");
+  const guestbookFormStatus = document.querySelector(".guestbook-form-status");
+  const guestbookSubmit = document.querySelector(".guestbook-submit");
+  const passwordModal = document.querySelector(".guestbook-password-modal");
+  const passwordForm = document.querySelector(".guestbook-password-form");
+  const actionPassword = document.querySelector("#guestbook-action-password");
+  const passwordStatus = document.querySelector(".guestbook-password-status");
+  const passwordTitle = document.querySelector("#guestbook-password-title");
+  const passwordDescription = document.querySelector(".guestbook-password-description");
+  let guestbookMessages = [];
+  let guestbookExpanded = false;
+  let guestbookEditId = null;
+  let passwordAction = null;
+  let administratorMode = false;
+
+  async function guestbookRpc(functionName, payload = {}) {
+    const response = await fetch(`${guestbookConfig.url}/rest/v1/rpc/${functionName}`, {
+      method: "POST",
+      headers: {
+        apikey: guestbookConfig.key,
+        Authorization: `Bearer ${guestbookConfig.key}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    const responseText = await response.text();
+    let result = null;
+    if (responseText) {
+      try { result = JSON.parse(responseText); } catch (error) { result = responseText; }
+    }
+    if (!response.ok) {
+      const message = result?.message || result?.hint || "요청을 처리하지 못했습니다.";
+      throw new Error(message);
+    }
+    return result;
+  }
+
+  function formatGuestbookDate(dateText) {
+    return new Intl.DateTimeFormat("ko-KR", {
+      year: "numeric", month: "2-digit", day: "2-digit"
+    }).format(new Date(dateText));
+  }
+
+  function renderGuestbook() {
+    guestbookList.replaceChildren();
+    const visibleMessages = guestbookExpanded ? guestbookMessages : guestbookMessages.slice(0, 3);
+    visibleMessages.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "guestbook-card";
+
+      const message = document.createElement("p");
+      message.className = "guestbook-card-message";
+      message.textContent = item.message;
+
+      const author = document.createElement("p");
+      author.className = "guestbook-card-author";
+      author.append("From ");
+      const authorName = document.createElement("strong");
+      authorName.textContent = item.author;
+      author.append(authorName, ` · ${formatGuestbookDate(item.created_at)}`);
+
+      const menu = document.createElement("div");
+      menu.className = "guestbook-card-menu";
+      const editButton = document.createElement("button");
+      editButton.type = "button";
+      editButton.textContent = "✎";
+      editButton.setAttribute("aria-label", `${item.author}님의 메시지 수정`);
+      editButton.addEventListener("click", () => openGuestbookEditor(item));
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.textContent = "×";
+      deleteButton.setAttribute("aria-label", `${item.author}님의 메시지 삭제`);
+      deleteButton.addEventListener("click", () => openPasswordModal(
+        administratorMode ? "admin-delete" : "delete",
+        item.id
+      ));
+      menu.append(editButton, deleteButton);
+      card.append(message, author, menu);
+      guestbookList.appendChild(card);
+    });
+
+    guestbookMore.hidden = guestbookMessages.length <= 3;
+    guestbookMore.textContent = guestbookExpanded ? "간단히 보기" : "전체 보기";
+    guestbookStatus.textContent = guestbookMessages.length
+      ? `총 ${guestbookMessages.length}개의 축하 메시지가 있습니다.`
+      : "첫 번째 축하 메시지를 남겨주세요.";
+    guestbookAdmin.textContent = administratorMode ? "관리자 삭제 모드 종료" : "관리자 삭제";
+  }
+
+  async function loadGuestbook() {
+    guestbookStatus.textContent = "방명록을 불러오는 중입니다.";
+    try {
+      guestbookMessages = await guestbookRpc("guestbook_list", {
+        p_limit: 100,
+        p_offset: 0
+      }) || [];
+      renderGuestbook();
+    } catch (error) {
+      guestbookStatus.textContent = "방명록 데이터베이스 설정이 필요합니다.";
+    }
+  }
+
+  function setPageModalOpen(open) {
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
+  function openGuestbookEditor(item = null) {
+    guestbookEditId = item?.id || null;
+    guestbookModalTitle.textContent = item ? "축하 메시지 수정하기" : "축하 메시지 작성하기";
+    guestbookSubmit.textContent = item ? "수정 완료" : "작성 완료";
+    guestbookName.value = item?.author || "";
+    guestbookPassword.value = "";
+    guestbookMessage.value = item?.message || "";
+    guestbookCounter.textContent = `${guestbookMessage.value.length} / 200`;
+    guestbookFormStatus.textContent = "";
+    guestbookModal.hidden = false;
+    setPageModalOpen(true);
+    setTimeout(() => guestbookName.focus(), 50);
+  }
+
+  function closeGuestbookEditor() {
+    guestbookModal.hidden = true;
+    guestbookForm.reset();
+    guestbookEditId = null;
+    setPageModalOpen(false);
+  }
+
+  function openPasswordModal(action, id = null) {
+    passwordAction = { action, id };
+    passwordForm.reset();
+    passwordStatus.textContent = "";
+    const isAdmin = action === "admin-delete" || action === "admin-enable";
+    passwordTitle.textContent = isAdmin ? "관리자 비밀번호 확인" : "비밀번호 확인";
+    passwordDescription.textContent = isAdmin
+      ? "Supabase에서 설정한 관리자 비밀번호를 입력해 주세요."
+      : "작성할 때 입력한 비밀번호를 입력해 주세요.";
+    passwordModal.hidden = false;
+    setPageModalOpen(true);
+    setTimeout(() => actionPassword.focus(), 50);
+  }
+
+  function closePasswordModal() {
+    passwordModal.hidden = true;
+    passwordAction = null;
+    setPageModalOpen(false);
+  }
+
+  guestbookWrite.addEventListener("click", () => openGuestbookEditor());
+  guestbookMore.addEventListener("click", () => {
+    guestbookExpanded = !guestbookExpanded;
+    renderGuestbook();
+  });
+  guestbookAdmin.addEventListener("click", () => {
+    if (administratorMode) {
+      administratorMode = false;
+      renderGuestbook();
+    } else {
+      openPasswordModal("admin-enable");
+    }
+  });
+  guestbookMessage.addEventListener("input", () => {
+    guestbookCounter.textContent = `${guestbookMessage.value.length} / 200`;
+  });
+  document.querySelector(".guestbook-modal-close").addEventListener("click", closeGuestbookEditor);
+  guestbookModal.querySelector(".guestbook-modal-backdrop").addEventListener("click", closeGuestbookEditor);
+  document.querySelector(".guestbook-password-close").addEventListener("click", closePasswordModal);
+  passwordModal.querySelector(".guestbook-modal-backdrop").addEventListener("click", closePasswordModal);
+
+  guestbookForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    guestbookSubmit.disabled = true;
+    guestbookFormStatus.textContent = guestbookEditId ? "메시지를 수정하고 있습니다." : "메시지를 남기고 있습니다.";
+    try {
+      const payload = {
+        p_author: guestbookName.value.trim(),
+        p_message: guestbookMessage.value.trim(),
+        p_password: guestbookPassword.value
+      };
+      if (guestbookEditId) {
+        payload.p_id = guestbookEditId;
+        await guestbookRpc("guestbook_update", payload);
+      } else {
+        await guestbookRpc("guestbook_create", payload);
+      }
+      closeGuestbookEditor();
+      await loadGuestbook();
+    } catch (error) {
+      guestbookFormStatus.textContent = error.message.includes("password")
+        ? "비밀번호가 일치하지 않습니다."
+        : error.message;
+    } finally {
+      guestbookSubmit.disabled = false;
+    }
+  });
+
+  passwordForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const currentAction = passwordAction;
+    const passwordSubmit = document.querySelector(".guestbook-password-submit");
+    passwordSubmit.disabled = true;
+    passwordStatus.textContent = "확인하고 있습니다.";
+    try {
+      if (currentAction.action === "delete") {
+        await guestbookRpc("guestbook_delete", {
+          p_id: currentAction.id,
+          p_password: actionPassword.value
+        });
+      } else if (currentAction.action === "admin-enable") {
+        await guestbookRpc("guestbook_admin_verify", {
+          p_admin_password: actionPassword.value
+        });
+        administratorMode = true;
+      } else if (currentAction.action === "admin-delete") {
+        await guestbookRpc("guestbook_admin_delete", {
+          p_id: currentAction.id,
+          p_admin_password: actionPassword.value
+        });
+      }
+      closePasswordModal();
+      await loadGuestbook();
+    } catch (error) {
+      passwordStatus.textContent = "비밀번호가 일치하지 않습니다.";
+    } finally {
+      passwordSubmit.disabled = false;
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (!guestbookModal.hidden) closeGuestbookEditor();
+    if (!passwordModal.hidden) closePasswordModal();
+  });
+
+  loadGuestbook();
+}
