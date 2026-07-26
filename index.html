@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260726-55">
+  <link rel="stylesheet" href="style.css?v=20260726-56">
 </head>
 <body>
   <audio id="background-music" preload="auto" autoplay loop playsinline>
@@ -247,8 +247,11 @@
         <form class="guestbook-form">
           <input id="guestbook-name" name="name" type="text" maxlength="20" autocomplete="name" placeholder="성함을 남겨주세요 / 請留下姓名" required>
           <input id="guestbook-password" name="password" type="password" minlength="4" maxlength="30" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요 / 請輸入密碼" required>
-          <textarea id="guestbook-message" name="message" maxlength="200" placeholder="200자 이내로 작성해 주세요" required></textarea>
-          <small class="guestbook-message-yue" lang="zh-HK">請於200字內填寫</small>
+          <textarea id="guestbook-message" name="message" maxlength="200" aria-label="축하 메시지" required></textarea>
+          <div class="guestbook-message-guide">
+            <small class="guestbook-message-ko" lang="ko">200자 이내로 작성해 주세요</small>
+            <small class="guestbook-message-yue" lang="zh-HK">請於200字內填寫</small>
+          </div>
           <span class="guestbook-counter">0 / 200</span>
           <p class="guestbook-form-status" role="status" aria-live="polite"></p>
           <button class="guestbook-submit" type="submit"><span>작성 완료</span><small lang="zh-HK">完成留言</small></button>
