@@ -22,9 +22,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260726-48">
+  <link rel="stylesheet" href="style.css?v=20260726-49">
 </head>
 <body>
+  <audio id="background-music" preload="auto" autoplay loop playsinline>
+    <source src="All%20You%20Need%20is%20Love.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle" type="button" aria-label="배경 음악 재생" aria-pressed="false">
+    <span aria-hidden="true">♫</span>
+  </button>
+
   <main class="invitation">
     <div class="hero-photo" aria-hidden="true"></div>
     <div class="hero-blur" aria-hidden="true"></div>
@@ -283,6 +290,6 @@
     <div class="lightbox-count" aria-live="polite"></div>
   </div>
 
-  <script src="script.js?v=20260726-28"></script>
+  <script src="script.js?v=20260726-29"></script>
 </body>
 </html>
