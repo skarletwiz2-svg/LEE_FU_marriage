@@ -191,6 +191,88 @@ button { font:inherit; }
 .guestbook-submit:disabled, .guestbook-password-submit:disabled { opacity:.55; }
 .guestbook-password-card { padding-top:45px; }
 .guestbook-password-description { word-break:keep-all; }
+
+/* Guestbook: preserve the intended proportions across iPhone and Android sizes. */
+.guestbook-section {
+  padding:
+    clamp(58px,15.2vw,78px)
+    clamp(16px,4.7vw,24px)
+    clamp(72px,18.4vw,94px);
+}
+.guestbook-section h2 {
+  margin-bottom:clamp(9px,2.35vw,12px);
+  font-size:clamp(24px,5.9vw,30px);
+}
+.guestbook-subtitle { font-size:clamp(11px,2.55vw,13px); }
+.guestbook-subtitle-yue { font-size:clamp(10px,2.35vw,12px); }
+.guestbook-list {
+  gap:clamp(10px,2.55vw,13px);
+  margin:clamp(26px,6.65vw,34px) clamp(0px,1.95vw,10px) 0;
+}
+.guestbook-card {
+  min-height:clamp(112px,25vw,128px);
+  padding:
+    clamp(19px,4.7vw,24px)
+    clamp(16px,4.1vw,21px)
+    clamp(17px,3.9vw,20px);
+}
+.guestbook-card-message {
+  margin-right:clamp(18px,4.3vw,22px);
+  margin-bottom:clamp(18px,4.7vw,24px);
+  font-size:clamp(12px,2.75vw,14px);
+}
+.guestbook-card-author { font-size:clamp(10px,2.35vw,12px); }
+.guestbook-actions { margin-right:clamp(0px,1.95vw,10px); margin-left:clamp(0px,1.95vw,10px); }
+
+.guestbook-modal,
+.guestbook-password-modal {
+  padding:
+    max(clamp(10px,3.5vw,18px),env(safe-area-inset-top))
+    clamp(10px,2.95vw,15px)
+    max(clamp(10px,3.5vw,18px),env(safe-area-inset-bottom));
+}
+.guestbook-modal-card {
+  width:min(100%,420px);
+  max-height:min(calc(100dvh - 20px),680px);
+  padding:
+    clamp(34px,8.15vw,42px)
+    clamp(12px,2.95vw,15px)
+    clamp(14px,3.55vw,18px);
+  border-radius:clamp(8px,1.95vw,10px);
+}
+.guestbook-modal-card h2 { font-size:clamp(16px,3.55vw,18px); }
+.guestbook-modal-card h2 small { font-size:clamp(12px,2.75vw,14px); }
+.guestbook-modal-card > p {
+  margin-bottom:clamp(18px,5.3vw,27px);
+  font-size:clamp(10px,2.15vw,11px);
+}
+.guestbook-form,
+.guestbook-password-form { gap:clamp(8px,1.95vw,10px); }
+.guestbook-form input,
+.guestbook-form textarea,
+.guestbook-password-form input {
+  border-radius:clamp(5px,1.2vw,6px);
+  font-size:clamp(14px,3.15vw,16px);
+}
+.guestbook-form input,
+.guestbook-password-form input {
+  height:clamp(44px,9.2vw,47px);
+  padding:0 clamp(10px,2.35vw,12px);
+}
+.guestbook-form textarea {
+  min-height:clamp(118px,28.4vw,145px);
+  padding:clamp(10px,2.35vw,12px);
+}
+.guestbook-message-yue { font-size:clamp(10px,2.15vw,11px); }
+.guestbook-submit,
+.guestbook-password-submit { min-height:clamp(44px,9.4vw,48px); }
+
+@media (max-height:620px) {
+  .guestbook-modal-card { max-height:calc(100dvh - 16px); padding-top:32px; }
+  .guestbook-modal-card h2 small { margin-top:2px; }
+  .guestbook-modal-card > p { margin-bottom:12px; line-height:1.35; }
+  .guestbook-form textarea { min-height:94px; }
+}
 .gift-section { position:relative; z-index:4; padding:76px 24px 82px; text-align:center; background:#f8f7f5; }
 .gift-line { display:block; width:54px; height:1px; margin:0 auto 62px; background:#37322f; }
 .gift-section h2 { margin:0 0 12px; font-size:var(--text-16); font-weight:500; letter-spacing:.04em; }
