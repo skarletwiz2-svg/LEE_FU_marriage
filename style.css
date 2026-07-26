@@ -149,7 +149,7 @@ button { font:inherit; }
 .bus-stop em { display:inline-grid; place-items:center; width:17px; height:17px; margin-right:3px; border-radius:50%; color:#fff; font:700 var(--text-10)/1 Arial,sans-serif; font-style:normal; vertical-align:-1px; }
 .bus-green { background:#2ebd5b; }
 .bus-blue { margin-left:5px; background:#2696d6; }
-.guestbook-section { position:relative; z-index:4; padding:78px 24px 82px; text-align:center; background:#efeeee; }
+.guestbook-section { position:relative; z-index:4; padding:78px 24px 94px; text-align:center; background:#efeeee; }
 .guestbook-section h2 { margin:0 0 12px; font:400 var(--text-30)/1.2 Georgia,serif; letter-spacing:.12em; }
 .guestbook-subtitle { margin:0; color:#8c8783; font-size:var(--text-13); line-height:1.7; }
 .guestbook-subtitle-yue { margin-top:2px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-12); }
@@ -164,8 +164,10 @@ button { font:inherit; }
 .guestbook-actions { display:grid; gap:9px; margin:27px 10px 0; }
 .guestbook-actions button, .guestbook-submit, .guestbook-password-submit { min-height:48px; border:0; border-radius:7px; font-size:var(--text-13); cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .guestbook-write, .guestbook-submit, .guestbook-password-submit { color:#fff; background:#999; box-shadow:0 5px 12px rgba(48,43,40,.15); }
+.guestbook-write { display:flex; align-items:center; justify-content:center; gap:9px; }
+.guestbook-write small { padding-left:9px; border-left:1px solid rgba(255,255,255,.45); font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-11); font-weight:400; }
 .guestbook-more { color:#8e8985; background:transparent; }
-.guestbook-admin { min-height:34px !important; color:#aaa5a1; background:transparent; font-size:var(--text-10) !important; }
+.guestbook-admin { position:absolute; right:17px; bottom:15px; min-width:44px; min-height:34px; padding:0 7px; border:0; color:#aaa5a1; background:transparent; font-size:var(--text-10); cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .guestbook-modal[hidden], .guestbook-password-modal[hidden] { display:none; }
 .guestbook-modal, .guestbook-password-modal { position:fixed; z-index:40; inset:0; display:grid; place-items:center; padding:max(18px,env(safe-area-inset-top)) 15px max(18px,env(safe-area-inset-bottom)); }
 .guestbook-modal-backdrop { position:absolute; inset:0; width:100%; border:0; background:rgba(25,23,22,.58); backdrop-filter:blur(3px); }
