@@ -182,6 +182,7 @@ button { font:inherit; }
 .guestbook-form input, .guestbook-form textarea, .guestbook-password-form input { width:100%; border:0; border-radius:6px; outline:0; color:#332f2c; background:#fff; box-shadow:0 4px 10px rgba(45,41,38,.1); font:400 16px/1.5 "Noto Serif KR",serif; }
 .guestbook-form input, .guestbook-password-form input { height:47px; padding:0 12px; }
 .guestbook-form textarea { min-height:145px; padding:12px; resize:vertical; }
+.guestbook-message-yue { display:block; margin-top:-5px; color:#99938f; text-align:left; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-11); line-height:1.5; }
 .guestbook-form input:focus, .guestbook-form textarea:focus, .guestbook-password-form input:focus { box-shadow:0 0 0 1px #aaa39d,0 4px 10px rgba(45,41,38,.1); }
 .guestbook-counter { margin-top:-4px; color:#aaa4a0; text-align:right; font-size:var(--text-10); }
 .guestbook-form-status, .guestbook-password-status { min-height:19px; margin:0; color:#a15f56; font-size:var(--text-11); }
