@@ -173,7 +173,10 @@ button { font:inherit; }
 .guestbook-modal-backdrop { position:absolute; inset:0; width:100%; border:0; background:rgba(25,23,22,.58); backdrop-filter:blur(3px); }
 .guestbook-modal-card { position:relative; z-index:1; width:min(100%,420px); max-height:calc(100svh - 36px); overflow:auto; padding:39px 15px 18px; border-radius:10px; background:#f5f5f5; box-shadow:0 16px 45px rgba(0,0,0,.24); text-align:center; }
 .guestbook-modal-card h2 { margin:0 0 8px; font-size:var(--text-18); font-weight:500; }
+.guestbook-modal-card h2 span, .guestbook-modal-card h2 small, .guestbook-modal-card > p span, .guestbook-modal-card > p small { display:block; }
+.guestbook-modal-card h2 small { margin-top:5px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-14); font-weight:400; }
 .guestbook-modal-card > p { margin:0 0 27px; color:#999; font-size:var(--text-11); }
+.guestbook-modal-card > p small { margin-top:3px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-10); }
 .guestbook-modal-close, .guestbook-password-close { position:absolute; top:8px; right:9px; width:38px; height:38px; border:0; color:#777; background:transparent; font:300 27px/1 Arial,sans-serif; cursor:pointer; }
 .guestbook-form, .guestbook-password-form { display:grid; gap:10px; }
 .guestbook-form input, .guestbook-form textarea, .guestbook-password-form input { width:100%; border:0; border-radius:6px; outline:0; color:#332f2c; background:#fff; box-shadow:0 4px 10px rgba(45,41,38,.1); font:400 16px/1.5 "Noto Serif KR",serif; }
@@ -182,7 +185,8 @@ button { font:inherit; }
 .guestbook-form input:focus, .guestbook-form textarea:focus, .guestbook-password-form input:focus { box-shadow:0 0 0 1px #aaa39d,0 4px 10px rgba(45,41,38,.1); }
 .guestbook-counter { margin-top:-4px; color:#aaa4a0; text-align:right; font-size:var(--text-10); }
 .guestbook-form-status, .guestbook-password-status { min-height:19px; margin:0; color:#a15f56; font-size:var(--text-11); }
-.guestbook-submit, .guestbook-password-submit { margin-top:5px; }
+.guestbook-submit, .guestbook-password-submit { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:5px; }
+.guestbook-submit small, .guestbook-password-submit small { padding-left:8px; border-left:1px solid rgba(255,255,255,.45); font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-11); font-weight:400; }
 .guestbook-submit:disabled, .guestbook-password-submit:disabled { opacity:.55; }
 .guestbook-password-card { padding-top:45px; }
 .guestbook-password-description { word-break:keep-all; }
