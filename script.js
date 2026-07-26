@@ -55,6 +55,7 @@ playBackgroundMusic();
 
 const initialHeroHeight = window.innerHeight;
 document.documentElement.style.setProperty("--hero-height", `${initialHeroHeight}px`);
+document.documentElement.classList.add("intro-locked");
 document.body.classList.add("intro-locked");
 window.scrollTo(0, 0);
 
@@ -76,6 +77,7 @@ document.addEventListener("wheel", blockIntroScroll, { passive: false });
 
 function unlockInvitation() {
   clearTimeout(introUnlockTimer);
+  document.documentElement.classList.remove("intro-locked");
   document.body.classList.remove("intro-locked");
   document.removeEventListener("touchmove", blockIntroScroll);
   document.removeEventListener("wheel", blockIntroScroll);
@@ -85,6 +87,7 @@ function unlockInvitation() {
 function startInvitationAnimation(forceRestart = false) {
   if (animationStarted && !forceRestart) return;
   animationStarted = true;
+  document.documentElement.classList.add("intro-locked");
   document.body.classList.add("intro-locked");
   document.addEventListener("touchmove", blockIntroScroll, { passive: false });
   document.addEventListener("wheel", blockIntroScroll, { passive: false });
