@@ -92,14 +92,19 @@ function unlockInvitation() {
   clearTimeout(introUnlockTimer);
   document.documentElement.classList.remove("intro-locked");
   document.body.classList.remove("intro-locked");
+  document.documentElement.classList.add("intro-unlocked");
+  document.body.classList.add("intro-unlocked");
   document.removeEventListener("touchmove", blockIntroScroll);
   document.removeEventListener("wheel", blockIntroScroll);
+  void document.body.offsetHeight;
   window.scrollTo(0, 0);
 }
 
 function startInvitationAnimation(forceRestart = false) {
   if (animationStarted && !forceRestart) return;
   animationStarted = true;
+  document.documentElement.classList.remove("intro-unlocked");
+  document.body.classList.remove("intro-unlocked");
   document.documentElement.classList.add("intro-locked");
   document.body.classList.add("intro-locked");
   document.addEventListener("touchmove", blockIntroScroll, { passive: false });
