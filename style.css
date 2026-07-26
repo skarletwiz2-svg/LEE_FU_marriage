@@ -226,52 +226,62 @@ button { font:inherit; }
 
 .guestbook-modal,
 .guestbook-password-modal {
+  overscroll-behavior:none;
+  touch-action:none;
   padding:
     max(clamp(10px,3.5vw,18px),env(safe-area-inset-top))
     clamp(10px,2.95vw,15px)
     max(clamp(10px,3.5vw,18px),env(safe-area-inset-bottom));
 }
+.guestbook-modal-open { overscroll-behavior:none; }
+html.guestbook-modal-open,
+body.guestbook-modal-open { width:100%; height:100%; overflow:hidden; }
+body.guestbook-modal-open { position:fixed; right:0; left:0; }
 .guestbook-modal-card {
-  width:min(100%,420px);
-  max-height:min(calc(100dvh - 20px),680px);
+  width:min(calc(100vw - 44px),360px);
+  max-height:min(calc(100dvh - 48px),620px);
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
   padding:
-    clamp(34px,8.15vw,42px)
-    clamp(12px,2.95vw,15px)
-    clamp(14px,3.55vw,18px);
+    clamp(30px,7vw,36px)
+    clamp(11px,2.75vw,14px)
+    clamp(12px,3vw,16px);
   border-radius:clamp(8px,1.95vw,10px);
 }
-.guestbook-modal-card h2 { font-size:clamp(16px,3.55vw,18px); }
-.guestbook-modal-card h2 small { font-size:clamp(12px,2.75vw,14px); }
+.guestbook-modal-card h2 { margin-bottom:5px; font-size:clamp(15px,3.35vw,17px); }
+.guestbook-modal-card h2 small { margin-top:3px; font-size:clamp(11px,2.55vw,13px); }
 .guestbook-modal-card > p {
-  margin-bottom:clamp(18px,5.3vw,27px);
+  margin-bottom:clamp(13px,3.7vw,19px);
   font-size:clamp(10px,2.15vw,11px);
 }
 .guestbook-form,
-.guestbook-password-form { gap:clamp(8px,1.95vw,10px); }
+.guestbook-password-form { gap:clamp(7px,1.7vw,9px); }
 .guestbook-form input,
 .guestbook-form textarea,
 .guestbook-password-form input {
   border-radius:clamp(5px,1.2vw,6px);
-  font-size:clamp(14px,3.15vw,16px);
+  font-size:16px;
 }
 .guestbook-form input,
 .guestbook-password-form input {
-  height:clamp(44px,9.2vw,47px);
+  height:clamp(41px,8.8vw,45px);
   padding:0 clamp(10px,2.35vw,12px);
 }
 .guestbook-form textarea {
-  min-height:clamp(118px,28.4vw,145px);
+  min-height:clamp(96px,24vw,116px);
+  max-height:180px;
   padding:clamp(10px,2.35vw,12px);
 }
 .guestbook-message-yue { font-size:clamp(10px,2.15vw,11px); }
 .guestbook-submit,
-.guestbook-password-submit { min-height:clamp(44px,9.4vw,48px); }
+.guestbook-password-submit { min-height:clamp(41px,8.8vw,45px); }
 
 @media (max-height:620px) {
-  .guestbook-modal-card { max-height:calc(100dvh - 16px); padding-top:32px; }
+  .guestbook-modal-card { max-height:calc(100dvh - 24px); padding-top:29px; }
   .guestbook-modal-card h2 small { margin-top:2px; }
-  .guestbook-modal-card > p { margin-bottom:12px; line-height:1.35; }
-  .guestbook-form textarea { min-height:94px; }
+  .guestbook-modal-card > p { margin-bottom:9px; line-height:1.3; }
+  .guestbook-form textarea { min-height:82px; }
 }
 .gift-section { position:relative; z-index:4; padding:76px 24px 82px; text-align:center; background:#f8f7f5; }
 .gift-line { display:block; width:54px; height:1px; margin:0 auto 62px; background:#37322f; }
