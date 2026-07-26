@@ -6,6 +6,53 @@ const photos = [
   { src: "images/KJH03296-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 5" }
 ];
 
+const backgroundMusic = document.querySelector("#background-music");
+const musicToggle = document.querySelector(".music-toggle");
+let musicManuallyPaused = false;
+
+function updateMusicButton() {
+  const isPlaying = !backgroundMusic.paused;
+  musicToggle.classList.toggle("is-playing", isPlaying);
+  musicToggle.setAttribute("aria-pressed", String(isPlaying));
+  musicToggle.setAttribute("aria-label", isPlaying ? "배경 음악 일시정지" : "배경 음악 재생");
+}
+
+function playBackgroundMusic() {
+  if (musicManuallyPaused || !backgroundMusic.paused) return;
+  const playRequest = backgroundMusic.play();
+  if (playRequest) playRequest.then(updateMusicButton).catch(updateMusicButton);
+}
+
+backgroundMusic.volume = 0.55;
+backgroundMusic.addEventListener("play", updateMusicButton);
+backgroundMusic.addEventListener("pause", updateMusicButton);
+backgroundMusic.addEventListener("ended", () => {
+  if (!musicManuallyPaused) {
+    backgroundMusic.currentTime = 0;
+    playBackgroundMusic();
+  }
+});
+
+musicToggle.addEventListener("click", () => {
+  if (backgroundMusic.paused) {
+    musicManuallyPaused = false;
+    playBackgroundMusic();
+  } else {
+    musicManuallyPaused = true;
+    backgroundMusic.pause();
+  }
+});
+
+["touchstart", "pointerdown", "keydown", "scroll"].forEach((eventName) => {
+  document.addEventListener(eventName, playBackgroundMusic, {
+    capture: true,
+    passive: true
+  });
+});
+
+window.addEventListener("load", playBackgroundMusic);
+playBackgroundMusic();
+
 const initialHeroHeight = window.innerHeight;
 document.documentElement.style.setProperty("--hero-height", `${initialHeroHeight}px`);
 document.body.classList.add("intro-locked");
