@@ -35,7 +35,6 @@ document.addEventListener("visibilitychange", () => {
   if (document.hidden) pauseMusicWhenLeavingPage();
 });
 window.addEventListener("pagehide", pauseMusicWhenLeavingPage);
-window.addEventListener("blur", pauseMusicWhenLeavingPage);
 
 backgroundMusic.volume = 0.55;
 backgroundMusic.addEventListener("play", updateMusicButton);
