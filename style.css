@@ -12,7 +12,8 @@
 * { box-sizing:border-box; }
 html,body { margin:0; min-height:100%; background:#171513; }
 body { color:var(--ink); font-family:"Noto Serif KR","Batang","Times New Roman",serif; }
-body.intro-locked { overscroll-behavior:none; }
+html.intro-locked { --hero-height:100dvh !important; height:100%; overflow:hidden; overscroll-behavior:none; }
+body.intro-locked { position:fixed; inset:0; width:100%; height:100%; overflow:hidden; overscroll-behavior:none; touch-action:none; }
 button { font:inherit; }
 .music-toggle { position:fixed; z-index:40; right:max(16px,calc((100vw - 520px)/2 + 16px)); bottom:max(16px,env(safe-area-inset-bottom)); display:grid; place-items:center; width:42px; height:42px; padding:0; border:1px solid rgba(255,255,255,.55); border-radius:50%; color:#fff; background:rgba(48,39,34,.62); box-shadow:0 4px 14px rgba(0,0,0,.18); font:400 20px/1 Georgia,serif; cursor:pointer; -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); -webkit-tap-highlight-color:transparent; }
 .music-toggle.is-playing span { animation:music-pulse 1.7s ease-in-out infinite; }
@@ -319,8 +320,8 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
 .account-copy-icon::after { top:5px; left:6px; background:#777574; }
 .account-feedback { min-height:0; margin:0; color:#a17368; text-align:center; font-size:var(--text-10); transition:min-height .2s ease,margin .2s ease; }
 .account-feedback:not(:empty) { min-height:14px; margin-top:8px; }
-.wedding-day { position:relative; padding:74px 16px 82px; text-align:center; background:#e9ded2; border-top:1px solid #d8c7bc; border-bottom:1px solid #d8c7bc; overflow:hidden; perspective:900px; }
-.wedding-card { position:relative; container-type:inline-size; display:flex; flex-direction:column; justify-content:center; width:100%; max-width:488px; aspect-ratio:941/1672; margin:0 auto; padding:76px 48px; background:#e9ded2 url("images/lace-paper-transparent.webp?v=20260725-3") center/100% 100% no-repeat; opacity:1; transform:none; transform-origin:center bottom; }
+.wedding-day { position:relative; padding:56px 4px 64px; text-align:center; background:#e9ded2; border-top:1px solid #d8c7bc; border-bottom:1px solid #d8c7bc; overflow:hidden; perspective:900px; }
+.wedding-card { position:relative; container-type:inline-size; display:flex; flex-direction:column; justify-content:center; width:100%; max-width:512px; aspect-ratio:941/1672; margin:0 auto; padding:76px 48px; background:#e9ded2 url("images/lace-paper-transparent.webp?v=20260725-3") center/100% 100% no-repeat; opacity:1; transform:none; transform-origin:center bottom; }
 .wedding-card::before { content:""; position:absolute; inset:16% 14%; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 34%,rgba(181,145,126,.025) 72%,transparent); }
 .wedding-card > * { position:relative; z-index:1; }
 .wedding-day.reveal-pending .wedding-card { opacity:0; transform:translate3d(0,190px,0) rotateX(4deg) scale(.965); }
@@ -356,12 +357,12 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
 .wedding-countdown p { margin:0; color:#8b6d65; font-size:var(--text-16); line-height:1.7; letter-spacing:.025em; white-space:nowrap; }
 .wedding-countdown p + p { color:#7b6e68; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-16); }
 @supports (width:1cqi) {
-  .wedding-card { padding:clamp(52px,16.1cqi,76px) clamp(29px,10.2cqi,48px); }
-  .section-kicker { margin-bottom:clamp(8px,2.35cqi,11px); font-size:clamp(7px,2.1cqi,10px); }
-  .wedding-day h2 { font-size:clamp(21px,5.75cqi,27px); }
+  .wedding-card { padding:clamp(48px,14.8cqi,76px) clamp(26px,8.8cqi,45px); }
+  .section-kicker { margin-bottom:clamp(8px,2.35cqi,12px); font-size:clamp(8px,2.3cqi,12px); }
+  .wedding-day h2 { font-size:clamp(23px,6.35cqi,32px); }
   .day-ornament { margin:clamp(14px,4.25cqi,20px) 0 clamp(19px,5.75cqi,27px); font-size:clamp(10px,2.55cqi,12px); }
-  .date-block .date, .wedding-countdown p, .wedding-countdown p + p { font-size:clamp(12px,3.62cqi,17px); }
-  .date-block .place, .date-block-yue .date { font-size:clamp(11px,3.2cqi,15px); }
+  .date-block .date, .wedding-countdown p, .wedding-countdown p + p { font-size:clamp(14px,4cqi,20px); }
+  .date-block .place, .date-block-yue .date { font-size:clamp(12px,3.55cqi,18px); }
   .date-block .place { margin-top:clamp(4px,1.28cqi,6px); }
   .language-divider { gap:clamp(9px,2.75cqi,13px); margin:clamp(25px,7.65cqi,36px) auto; }
   .language-divider span { width:clamp(31px,9.35cqi,44px); }
@@ -399,5 +400,5 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
 @keyframes section-rise { from { opacity:0; transform:translate3d(0,125px,0); } to { opacity:1; transform:translate3d(0,0,0); } }
 @keyframes gallery-rise { from { opacity:0; transform:translate3d(0,140px,0) scale(.985); } to { opacity:1; transform:translate3d(0,0,0) scale(1); } }
 @keyframes wedding-rise { from { opacity:0; transform:translate3d(0,190px,0) rotateX(4deg) scale(.965); } to { opacity:1; transform:translate3d(0,0,0) rotateX(0) scale(1); } }
-@media (max-width:360px) { .wedding-day { padding-right:10px; padding-left:10px; } }
+@media (max-width:360px) { .wedding-day { padding-right:3px; padding-left:3px; } }
 @media (min-width:521px) { .invitation { box-shadow:0 0 80px rgba(0,0,0,.4); } }
