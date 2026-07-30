@@ -26,7 +26,7 @@ button { font:inherit; }
 .hero-photo { position:absolute; z-index:-4; top:0; left:0; width:100%; height:var(--hero-height); background:url("images/KJH02739-2-hero.jpg") center 34%/cover no-repeat; }
 .hero-blur { position:absolute; z-index:-3; top:0; left:0; width:100%; height:var(--hero-height); opacity:0; background:url("images/KJH02739-2-blur.jpg") center 34%/cover no-repeat; animation:blur-fade 10s cubic-bezier(.2,.7,.2,1) forwards; will-change:opacity; }
 .hero-shade { position:absolute; z-index:-2; top:0; left:0; width:100%; height:var(--hero-height); background:linear-gradient(180deg,rgba(15,12,10,.08),rgba(15,12,10,.1) 40%,rgba(20,16,14,.58)); animation:deepen 1.2s ease forwards; }
-.start-prompt { position:absolute; z-index:4; left:50%; bottom:max(72px,calc(env(safe-area-inset-bottom) + 54px)); width:calc(100% - 48px); color:#fff; text-align:center; text-shadow:0 2px 14px rgba(0,0,0,.55); transform:translateX(-50%); transition:opacity .45s ease,visibility .45s ease; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.start-prompt { position:absolute; z-index:4; top:calc(var(--hero-height) - 118px - env(safe-area-inset-bottom)); left:50%; width:calc(100% - 48px); color:#fff; text-align:center; text-shadow:0 2px 14px rgba(0,0,0,.55); transform:translateX(-50%); transition:opacity .45s ease,visibility .45s ease; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .start-prompt p { margin:0; font-size:clamp(13px,3.65vw,16px); line-height:1.65; letter-spacing:.025em; word-break:keep-all; }
 .start-prompt p[lang="zh-HK"] { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:clamp(12px,3.35vw,15px); }
 .invitation.is-ready .start-prompt { opacity:0; visibility:hidden; pointer-events:none; }
