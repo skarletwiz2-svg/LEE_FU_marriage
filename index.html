@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko" class="intro-locked">
+<html lang="ko" class="intro-locked awaiting-start">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -22,10 +22,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Nanum+Pen+Script&family=Noto+Serif+HK:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260730-64">
+  <link rel="stylesheet" href="style.css?v=20260730-65">
 </head>
-<body class="intro-locked">
-  <audio id="background-music" preload="auto" autoplay loop playsinline>
+<body class="intro-locked awaiting-start">
+  <audio id="background-music" preload="auto" loop playsinline>
     <source src="All%20You%20Need%20is%20Love.mp3" type="audio/mpeg">
   </audio>
   <button class="music-toggle" type="button" aria-label="배경 음악 재생" aria-pressed="false">
@@ -36,6 +36,10 @@
     <div class="hero-photo" aria-hidden="true"></div>
     <div class="hero-blur" aria-hidden="true"></div>
     <div class="hero-shade" aria-hidden="true"></div>
+    <div class="start-prompt" role="button" tabindex="0" aria-label="청첩장과 음악 시작">
+      <p lang="ko">화면을 터치하면 음악과 함께 시작됩니다.</p>
+      <p lang="zh-HK">輕觸畫面，喜帖將伴隨音樂展開。</p>
+    </div>
 
     <header class="intro">
       <p class="eyebrow">OUR WEDDING</p>
@@ -356,6 +360,6 @@
       key: "sb_publishable_6Pf_BnGnkVx6vGYldJFJmA_uow9vVuu"
     };
   </script>
-  <script src="script.js?v=20260730-39"></script>
+  <script src="script.js?v=20260730-40"></script>
 </body>
 </html>
