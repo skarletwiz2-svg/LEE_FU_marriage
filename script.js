@@ -133,11 +133,13 @@ function beginInvitation(event) {
   document.documentElement.classList.remove("awaiting-start");
   document.body.classList.remove("awaiting-start");
   startInvitationAnimation();
+  document.removeEventListener("touchstart", beginInvitation, true);
   document.removeEventListener("touchend", beginInvitation, true);
   document.removeEventListener("click", beginInvitation, true);
   document.removeEventListener("keydown", beginInvitation, true);
 }
 
+document.addEventListener("touchstart", beginInvitation, { capture: true, passive: true });
 document.addEventListener("touchend", beginInvitation, { capture: true, passive: true });
 document.addEventListener("click", beginInvitation, true);
 document.addEventListener("keydown", beginInvitation, true);
