@@ -301,10 +301,15 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
 }
 .gift-section { position:relative; z-index:4; padding:76px 24px 82px; text-align:center; background:#f8f7f5; }
 .gift-line { display:block; width:54px; height:1px; margin:0 auto 62px; background:#37322f; }
-.gift-section h2 { margin:0 0 12px; font-size:var(--text-16); font-weight:500; letter-spacing:.04em; }
+.gift-section h2 { margin:0; font-size:var(--text-16); font-weight:500; letter-spacing:.04em; }
+.gift-title-yue { margin:6px 0 14px; color:#6f6762; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:var(--text-14); line-height:1.5; letter-spacing:.06em; }
 .gift-message { margin:0; color:#89837e; font-size:var(--text-13); line-height:1.85; word-break:keep-all; }
+.gift-message-yue { margin:5px 0 0; color:#89837e; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:var(--text-12); line-height:1.8; word-break:keep-all; }
 .gift-accordion { margin:38px auto 0; overflow:hidden; border-radius:11px; background:#fff; box-shadow:0 4px 11px rgba(37,31,28,.14); text-align:left; }
 .gift-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:58px; padding:0 17px; border:0; color:#403936; background:#fff; font-size:var(--text-13); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.gift-toggle-label { display:flex; flex-direction:column; align-items:flex-start; gap:3px; line-height:1.35; }
+.gift-toggle-label b { font-weight:400; }
+.gift-toggle-label small { color:#8a817b; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:var(--text-11); font-weight:400; }
 .gift-toggle i { position:relative; width:12px; height:12px; flex:0 0 12px; transition:transform .3s ease; }
 .gift-toggle i::before, .gift-toggle i::after { content:""; position:absolute; top:5px; width:8px; height:1px; background:#9a938e; }
 .gift-toggle i::before { left:0; transform:rotate(45deg); }
@@ -379,6 +384,7 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
 .closing { padding:72px 24px 85px; color:#eee4dc; text-align:center; background:#322823; }
 .closing p { margin:0 0 12px; font:500 var(--text-9)/1 Arial,sans-serif; letter-spacing:.34em; }
 .closing span { display:inline-block; font-size:var(--text-13); font-weight:300; letter-spacing:.05em; }
+.closing > small { display:block; margin-top:7px; color:#d8ccc4; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:var(--text-12); font-weight:300; letter-spacing:.05em; }
 .family-section, .wedding-day, .location-section, .guestbook-section, .gift-section, .closing { contain:paint; }
 .lightbox[hidden] { display:none; }
 .lightbox { position:fixed; z-index:20; inset:0; display:grid; place-items:center; background:#0d0c0b; animation:fade-in .25s ease both; }
