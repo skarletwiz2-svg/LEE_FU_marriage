@@ -56,7 +56,7 @@ musicToggle.addEventListener("click", () => {
   }
 });
 
-["touchstart", "pointerdown", "keydown", "scroll"].forEach((eventName) => {
+["touchend", "click", "keydown"].forEach((eventName) => {
   document.addEventListener(eventName, playBackgroundMusic, {
     capture: true,
     passive: true
@@ -145,8 +145,15 @@ window.addEventListener("pageshow", (event) => {
 
 const petals = document.querySelector(".petals");
 const heroBlur = document.querySelector(".hero-blur");
+const finalStoryCopy = document.querySelector(".story-yue");
 petals.addEventListener("animationend", (event) => {
   if (event.animationName === "petals-window") {
+    invitation.classList.add("intro-finished");
+    unlockInvitation();
+  }
+});
+finalStoryCopy.addEventListener("animationend", (event) => {
+  if (event.animationName === "story-show") {
     invitation.classList.add("intro-finished");
     unlockInvitation();
   }
