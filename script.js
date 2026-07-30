@@ -8,7 +8,8 @@ const photos = [
 
 const backgroundMusic = document.querySelector("#background-music");
 const musicToggle = document.querySelector(".music-toggle");
-let musicManuallyPaused = false;
+const startPrompt = document.querySelector(".start-prompt");
+let musicManuallyPaused = true;
 
 function updateMusicButton() {
   const isPlaying = !backgroundMusic.paused;
@@ -55,16 +56,6 @@ musicToggle.addEventListener("click", () => {
     backgroundMusic.pause();
   }
 });
-
-["touchend", "click", "keydown"].forEach((eventName) => {
-  document.addEventListener(eventName, playBackgroundMusic, {
-    capture: true,
-    passive: true
-  });
-});
-
-window.addEventListener("load", playBackgroundMusic);
-playBackgroundMusic();
 
 const initialHeroHeight = window.innerHeight;
 document.documentElement.style.setProperty("--hero-height", `${initialHeroHeight}px`);
@@ -116,14 +107,13 @@ function startInvitationAnimation(forceRestart = false) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       invitation.classList.add("is-ready");
-      introUnlockTimer = setTimeout(unlockInvitation, 11300);
+      introUnlockTimer = setTimeout(unlockInvitation, 10300);
     });
   });
 }
 
 function markHeroReady(key) {
   readyHeroImages.add(key);
-  if (readyHeroImages.size >= 2) startInvitationAnimation();
 }
 
 heroPreloader.addEventListener("load", () => markHeroReady("sharp"));
@@ -134,13 +124,26 @@ heroPreloader.src = "images/KJH02739-2-hero.jpg";
 blurredHeroPreloader.src = "images/KJH02739-2-blur.jpg";
 if (heroPreloader.complete) markHeroReady("sharp");
 if (blurredHeroPreloader.complete) markHeroReady("blurred");
-setTimeout(() => startInvitationAnimation(), 4000);
+
+function beginInvitation(event) {
+  if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+  if (animationStarted) return;
+  musicManuallyPaused = false;
+  playBackgroundMusic();
+  document.documentElement.classList.remove("awaiting-start");
+  document.body.classList.remove("awaiting-start");
+  startInvitationAnimation();
+  document.removeEventListener("touchend", beginInvitation, true);
+  document.removeEventListener("click", beginInvitation, true);
+  document.removeEventListener("keydown", beginInvitation, true);
+}
+
+document.addEventListener("touchend", beginInvitation, { capture: true, passive: true });
+document.addEventListener("click", beginInvitation, true);
+document.addEventListener("keydown", beginInvitation, true);
 
 window.addEventListener("pageshow", (event) => {
-  if (event.persisted) {
-    invitation.classList.remove("intro-finished");
-    startInvitationAnimation(true);
-  }
+  if (event.persisted) updateMusicButton();
 });
 
 const petals = document.querySelector(".petals");
