@@ -10,6 +10,7 @@ const backgroundMusic = document.querySelector("#background-music");
 const musicToggle = document.querySelector(".music-toggle");
 const startPrompt = document.querySelector(".start-prompt");
 let musicManuallyPaused = true;
+let waitingForFirstMusicPlay = true;
 
 function updateMusicButton() {
   const isPlaying = !backgroundMusic.paused;
@@ -21,7 +22,19 @@ function updateMusicButton() {
 function playBackgroundMusic() {
   if (document.hidden || musicManuallyPaused || !backgroundMusic.paused) return;
   const playRequest = backgroundMusic.play();
-  if (playRequest) playRequest.then(updateMusicButton).catch(updateMusicButton);
+  if (playRequest) {
+    playRequest.then(updateMusicButton).catch(() => {
+      updateMusicButton();
+    });
+  }
+}
+
+function removeStartGestureListeners() {
+  document.removeEventListener("touchstart", beginInvitation, true);
+  document.removeEventListener("touchend", beginInvitation, true);
+  document.removeEventListener("pointerup", beginInvitation, true);
+  document.removeEventListener("click", beginInvitation, true);
+  document.removeEventListener("keydown", beginInvitation, true);
 }
 
 function pauseMusicWhenLeavingPage() {
@@ -38,7 +51,11 @@ document.addEventListener("visibilitychange", () => {
 window.addEventListener("pagehide", pauseMusicWhenLeavingPage);
 
 backgroundMusic.volume = 0.55;
-backgroundMusic.addEventListener("play", updateMusicButton);
+backgroundMusic.addEventListener("play", () => {
+  waitingForFirstMusicPlay = false;
+  removeStartGestureListeners();
+  updateMusicButton();
+});
 backgroundMusic.addEventListener("pause", updateMusicButton);
 backgroundMusic.addEventListener("ended", () => {
   if (!musicManuallyPaused) {
@@ -127,20 +144,19 @@ if (blurredHeroPreloader.complete) markHeroReady("blurred");
 
 function beginInvitation(event) {
   if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
-  if (animationStarted) return;
   musicManuallyPaused = false;
   playBackgroundMusic();
-  document.documentElement.classList.remove("awaiting-start");
-  document.body.classList.remove("awaiting-start");
-  startInvitationAnimation();
-  document.removeEventListener("touchstart", beginInvitation, true);
-  document.removeEventListener("touchend", beginInvitation, true);
-  document.removeEventListener("click", beginInvitation, true);
-  document.removeEventListener("keydown", beginInvitation, true);
+  if (!animationStarted) {
+    document.documentElement.classList.remove("awaiting-start");
+    document.body.classList.remove("awaiting-start");
+    startInvitationAnimation();
+  }
+  if (!waitingForFirstMusicPlay) removeStartGestureListeners();
 }
 
 document.addEventListener("touchstart", beginInvitation, { capture: true, passive: true });
 document.addEventListener("touchend", beginInvitation, { capture: true, passive: true });
+document.addEventListener("pointerup", beginInvitation, true);
 document.addEventListener("click", beginInvitation, true);
 document.addEventListener("keydown", beginInvitation, true);
 
@@ -455,6 +471,8 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
   let guestbookEditId = null;
   let passwordAction = null;
   let administratorMode = false;
+  let guestbookRetryTimer;
+  let guestbookRetryCount = 0;
 
   async function guestbookRpc(functionName, payload = {}) {
     const response = await fetch(`${guestbookConfig.url}/rest/v1/rpc/${functionName}`, {
@@ -531,17 +549,31 @@ if (guestbookSection && guestbookConfig?.url && guestbookConfig?.key) {
   }
 
   async function loadGuestbook() {
+    clearTimeout(guestbookRetryTimer);
     guestbookStatus.textContent = "방명록을 불러오는 중입니다. / 正在載入祝福留言。";
     try {
       guestbookMessages = await guestbookRpc("guestbook_list", {
         p_limit: 100,
         p_offset: 0
       }) || [];
+      guestbookRetryCount = 0;
       renderGuestbook();
     } catch (error) {
-      guestbookStatus.textContent = "방명록을 불러오지 못했습니다. / 無法載入祝福留言。";
+      guestbookRetryCount += 1;
+      if (guestbookRetryCount <= 6) {
+        const retryDelay = Math.min(5000 * (2 ** (guestbookRetryCount - 1)), 60000);
+        guestbookStatus.textContent = "방명록 서버에 다시 연결하는 중입니다. / 正在重新連接留言伺服器。";
+        guestbookRetryTimer = setTimeout(loadGuestbook, retryDelay);
+      } else {
+        guestbookStatus.textContent = "방명록 서버 연결을 확인해 주세요. / 請檢查留言伺服器連線。";
+      }
     }
   }
+
+  window.addEventListener("online", loadGuestbook);
+  window.addEventListener("pageshow", () => {
+    if (guestbookRetryCount) loadGuestbook();
+  });
 
   let pageScrollPosition = 0;
 
