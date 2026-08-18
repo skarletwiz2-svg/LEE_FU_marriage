@@ -20,7 +20,8 @@ function updateMusicButton() {
 }
 
 function playBackgroundMusic() {
-  if (document.hidden || musicManuallyPaused || !backgroundMusic.paused) return;
+  if (document.hidden || musicManuallyPaused) return;
+  if (!waitingForFirstMusicPlay && !backgroundMusic.paused) return;
   const playRequest = backgroundMusic.play();
   if (playRequest) {
     playRequest.then(updateMusicButton).catch(() => {
@@ -32,6 +33,7 @@ function playBackgroundMusic() {
 function removeStartGestureListeners() {
   document.removeEventListener("touchstart", beginInvitation, true);
   document.removeEventListener("touchend", beginInvitation, true);
+  document.removeEventListener("pointerdown", beginInvitation, true);
   document.removeEventListener("pointerup", beginInvitation, true);
   document.removeEventListener("click", beginInvitation, true);
   document.removeEventListener("keydown", beginInvitation, true);
@@ -156,6 +158,7 @@ function beginInvitation(event) {
 
 document.addEventListener("touchstart", beginInvitation, { capture: true, passive: true });
 document.addEventListener("touchend", beginInvitation, { capture: true, passive: true });
+document.addEventListener("pointerdown", beginInvitation, true);
 document.addEventListener("pointerup", beginInvitation, true);
 document.addEventListener("click", beginInvitation, true);
 document.addEventListener("keydown", beginInvitation, true);
