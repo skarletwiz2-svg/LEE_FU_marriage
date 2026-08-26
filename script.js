@@ -3,7 +3,16 @@ const photos = [
   { src: "images/KJH02546-2.jpg?v=20260721-8", alt: "웨딩 갤러리 사진 2" },
   { src: "images/KJH01666-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 3" },
   { src: "images/KJH03178-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 4" },
-  { src: "images/KJH03296-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 5" }
+  { src: "images/KJH03296-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 5" },
+  { src: "images/DEE00042-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 6" },
+  { src: "images/DEE00259-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 7" },
+  { src: "images/DEE00367-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 8" },
+  { src: "images/DEE00478-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 9" },
+  { src: "images/DEE00696-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 10" },
+  { src: "images/DEE00825-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 11" },
+  { src: "images/DEE01021-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 12" },
+  { src: "images/DEE01082-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 13" },
+  { src: "images/DEE01153-2.jpg?v=20260826-1", alt: "웨딩 갤러리 사진 14" }
 ];
 
 const backgroundMusic = document.querySelector("#background-music");
