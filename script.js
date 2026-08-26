@@ -279,18 +279,6 @@ function updateWeddingCountdown() {
 updateWeddingCountdown();
 setInterval(updateWeddingCountdown, 3600000);
 
-function warmUpScrollContent() {
-  document.querySelectorAll(".photo-button img").forEach((image) => {
-    if (typeof image.decode === "function") image.decode().catch(() => {});
-  });
-}
-
-if ("requestIdleCallback" in window) {
-  requestIdleCallback(warmUpScrollContent, { timeout: 1800 });
-} else {
-  setTimeout(warmUpScrollContent, 600);
-}
-
 const copyAddressButtons = document.querySelectorAll(".copy-address");
 const copyFeedback = document.querySelector(".copy-feedback");
 
