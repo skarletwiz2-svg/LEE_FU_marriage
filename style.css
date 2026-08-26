@@ -116,11 +116,11 @@ button { font:inherit; }
 .gallery-heading p { margin:0 0 5px; color:var(--accent); font:600 var(--text-9)/1 Arial,sans-serif; letter-spacing:.24em; }
 .gallery-heading h2 { margin:0; font:italic 400 var(--text-34)/1.05 Georgia,serif; }
 .gallery-heading>span { color:var(--muted); font:400 var(--text-11)/1 Arial,sans-serif; letter-spacing:.18em; }
-.photo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; }
+.photo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; }
 .photo-button { position:relative; min-width:0; aspect-ratio:1/1; padding:0; overflow:hidden; border:0; border-radius:8px; background:#ddd2c8; cursor:pointer; }
 .photo-button img { width:100%; height:100%; display:block; object-fit:cover; transition:transform .5s ease; }
 .photo-button:active img { transform:scale(1.035); }
-.view-label { position:absolute; right:10px; bottom:10px; padding:6px 8px; border-radius:999px; color:#fff; background:rgba(22,18,16,.48); font:600 var(--text-8)/1 Arial,sans-serif; letter-spacing:.15em; backdrop-filter:blur(5px); }
+.view-label { position:absolute; right:5px; bottom:5px; padding:4px 5px; border-radius:999px; color:#fff; background:rgba(22,18,16,.48); font:600 7px/1 Arial,sans-serif; letter-spacing:.1em; backdrop-filter:blur(5px); }
 .gallery-note { margin:15px 0 0; color:var(--muted); text-align:center; font-size:var(--text-11); letter-spacing:.04em; }
 .gallery-note-yue { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:var(--text-12); }
 .location-section { padding:78px 20px 72px; text-align:center; background:#f2efeb; }
@@ -162,148 +162,6 @@ button { font:inherit; }
 .bus-stop em { display:inline-grid; place-items:center; width:17px; height:17px; margin-right:3px; border-radius:50%; color:#fff; font:700 var(--text-10)/1 Arial,sans-serif; font-style:normal; vertical-align:-1px; }
 .bus-green { background:#2ebd5b; }
 .bus-blue { margin-left:5px; background:#2696d6; }
-.guestbook-section { position:relative; z-index:4; padding:78px 24px 94px; text-align:center; background:#efeeee; }
-.guestbook-section h2 { margin:0 0 12px; font:400 var(--text-30)/1.2 Georgia,serif; letter-spacing:.12em; }
-.guestbook-subtitle { margin:0; color:#8c8783; font-size:var(--text-14); line-height:1.7; }
-.guestbook-subtitle-yue { margin-top:2px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-13); }
-.guestbook-list { display:grid; gap:13px; margin:34px 10px 0; text-align:left; }
-.guestbook-card { position:relative; min-height:128px; padding:24px 21px 20px; border-radius:8px; background:#fff; box-shadow:0 7px 13px rgba(48,43,40,.14); }
-.guestbook-card-message { margin:0 22px 24px 0; color:#282421; font-size:var(--text-14); line-height:1.7; white-space:pre-wrap; overflow-wrap:anywhere; }
-.guestbook-card-author { margin:0; color:#8c827b; font-size:var(--text-12); }
-.guestbook-card-author strong { color:#635b56; font-weight:400; }
-.guestbook-card-menu { position:absolute; top:11px; right:11px; display:flex; gap:2px; }
-.guestbook-card-menu button { width:32px; height:32px; padding:0; border:0; color:#aaa39e; background:transparent; font:400 var(--text-14)/1 Arial,sans-serif; cursor:pointer; }
-.guestbook-status { min-height:20px; margin:24px 0 0; color:#99928d; font-size:var(--text-12); }
-.guestbook-actions { display:grid; gap:9px; margin:27px 10px 0; }
-.guestbook-actions button, .guestbook-submit, .guestbook-password-submit { min-height:48px; border:0; border-radius:7px; font-size:var(--text-13); cursor:pointer; -webkit-tap-highlight-color:transparent; }
-.guestbook-write, .guestbook-submit, .guestbook-password-submit { color:#fff; background:#999; box-shadow:0 5px 12px rgba(48,43,40,.15); }
-.guestbook-write { display:flex; align-items:center; justify-content:center; gap:9px; }
-.guestbook-write small { padding-left:9px; border-left:1px solid rgba(255,255,255,.45); font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-11); font-weight:400; }
-.guestbook-more { color:#8e8985; background:transparent; }
-.guestbook-admin { position:absolute; right:17px; bottom:15px; min-width:44px; min-height:34px; padding:0 7px; border:0; color:#aaa5a1; background:transparent; font-size:var(--text-10); cursor:pointer; -webkit-tap-highlight-color:transparent; }
-.guestbook-modal[hidden], .guestbook-password-modal[hidden] { display:none; }
-.guestbook-modal, .guestbook-password-modal { position:fixed; z-index:40; inset:0; display:grid; place-items:center; padding:max(18px,env(safe-area-inset-top)) 15px max(18px,env(safe-area-inset-bottom)); }
-.guestbook-modal-backdrop { position:absolute; inset:0; width:100%; border:0; background:rgba(25,23,22,.58); backdrop-filter:blur(3px); }
-.guestbook-modal-card { position:relative; z-index:1; width:min(100%,420px); max-height:calc(100svh - 36px); overflow:auto; padding:39px 15px 18px; border-radius:10px; background:#f5f5f5; box-shadow:0 16px 45px rgba(0,0,0,.24); text-align:center; }
-.guestbook-modal-card h2 { margin:0 0 8px; font-size:var(--text-18); font-weight:500; }
-.guestbook-modal-card h2 span, .guestbook-modal-card h2 small, .guestbook-modal-card > p span, .guestbook-modal-card > p small { display:block; }
-.guestbook-modal-card h2 small { margin-top:5px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-14); font-weight:400; }
-.guestbook-modal-card > p { margin:0 0 27px; color:#999; font-size:var(--text-11); }
-.guestbook-modal-card > p small { margin-top:3px; font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-10); }
-.guestbook-modal-close, .guestbook-password-close { position:absolute; top:8px; right:9px; width:38px; height:38px; border:0; color:#777; background:transparent; font:300 27px/1 Arial,sans-serif; cursor:pointer; }
-.guestbook-form, .guestbook-password-form { display:grid; gap:10px; }
-.guestbook-form input, .guestbook-form textarea, .guestbook-password-form input { width:100%; border:0; border-radius:6px; outline:0; color:#332f2c; background:#fff; box-shadow:0 4px 10px rgba(45,41,38,.1); font:400 16px/1.5 "Noto Serif KR",serif; }
-.guestbook-form input, .guestbook-password-form input { height:47px; padding:0 12px; }
-.guestbook-form textarea { min-height:145px; padding:12px; resize:vertical; }
-.guestbook-form input::placeholder,
-.guestbook-form textarea::placeholder { font-size:13px; }
-.guestbook-message-guide { margin-top:-4px; color:#99938f; text-align:left; line-height:1.45; }
-.guestbook-message-ko,
-.guestbook-message-yue { display:block; font-size:var(--text-11); font-weight:400; }
-.guestbook-message-yue { margin-top:1px; font-family:"Noto Serif HK","Noto Serif KR",serif; }
-.guestbook-form input:focus, .guestbook-form textarea:focus, .guestbook-password-form input:focus { box-shadow:0 0 0 1px #aaa39d,0 4px 10px rgba(45,41,38,.1); }
-.guestbook-counter { margin-top:-4px; color:#aaa4a0; text-align:right; font-size:var(--text-10); }
-.guestbook-form-status, .guestbook-password-status { min-height:19px; margin:0; color:#a15f56; font-size:var(--text-11); }
-.guestbook-submit, .guestbook-password-submit { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:5px; }
-.guestbook-submit small, .guestbook-password-submit small { padding-left:8px; border-left:1px solid rgba(255,255,255,.45); font-family:"Noto Serif HK","Noto Serif KR",serif; font-size:var(--text-11); font-weight:400; }
-.guestbook-submit:disabled, .guestbook-password-submit:disabled { opacity:.55; }
-.guestbook-password-card { padding-top:45px; }
-.guestbook-password-description { word-break:keep-all; }
-
-/* Guestbook: preserve the intended proportions across iPhone and Android sizes. */
-.guestbook-section {
-  padding:
-    clamp(58px,15.2vw,78px)
-    clamp(16px,4.7vw,24px)
-    clamp(72px,18.4vw,94px);
-}
-.guestbook-section h2 {
-  margin-bottom:clamp(9px,2.35vw,12px);
-  font-size:clamp(24px,5.9vw,30px);
-}
-.guestbook-subtitle { font-size:clamp(15px,3.35vw,17px); }
-.guestbook-subtitle-yue { font-size:clamp(14px,3.15vw,16px); }
-.guestbook-list {
-  gap:clamp(10px,2.55vw,13px);
-  margin:clamp(26px,6.65vw,34px) clamp(0px,1.95vw,10px) 0;
-}
-.guestbook-card {
-  min-height:clamp(112px,25vw,128px);
-  padding:
-    clamp(19px,4.7vw,24px)
-    clamp(16px,4.1vw,21px)
-    clamp(17px,3.9vw,20px);
-}
-.guestbook-card-message {
-  margin-right:clamp(18px,4.3vw,22px);
-  margin-bottom:clamp(18px,4.7vw,24px);
-  font-size:clamp(12px,2.75vw,14px);
-}
-.guestbook-card-author { font-size:clamp(10px,2.35vw,12px); }
-.guestbook-actions { margin-right:clamp(0px,1.95vw,10px); margin-left:clamp(0px,1.95vw,10px); }
-
-.guestbook-modal,
-.guestbook-password-modal {
-  overscroll-behavior:none;
-  touch-action:none;
-  padding:
-    max(clamp(10px,3.5vw,18px),env(safe-area-inset-top))
-    clamp(10px,2.95vw,15px)
-    max(clamp(10px,3.5vw,18px),env(safe-area-inset-bottom));
-}
-.guestbook-modal-open { overscroll-behavior:none; }
-html.guestbook-modal-open,
-body.guestbook-modal-open { width:100%; height:100%; overflow:hidden; }
-body.guestbook-modal-open { position:fixed; right:0; left:0; }
-.guestbook-modal-card {
-  width:min(calc(100vw - 44px),360px);
-  max-height:min(calc(100dvh - 48px),620px);
-  overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-  touch-action:pan-y;
-  padding:
-    clamp(30px,7vw,36px)
-    clamp(11px,2.75vw,14px)
-    clamp(12px,3vw,16px);
-  border-radius:clamp(8px,1.95vw,10px);
-}
-.guestbook-modal-card h2 { margin-bottom:5px; font-size:clamp(15px,3.35vw,17px); }
-.guestbook-modal-card h2 small { margin-top:3px; font-size:clamp(15px,3.35vw,17px); }
-.guestbook-modal-card > p {
-  margin-bottom:clamp(13px,3.7vw,19px);
-  font-size:clamp(13px,2.95vw,15px);
-  line-height:1.55;
-}
-.guestbook-modal-card > p small { font-size:clamp(13px,2.95vw,15px); line-height:1.55; }
-.guestbook-form,
-.guestbook-password-form { gap:clamp(7px,1.7vw,9px); }
-.guestbook-form input,
-.guestbook-form textarea,
-.guestbook-password-form input {
-  border-radius:clamp(5px,1.2vw,6px);
-  font-size:16px;
-}
-.guestbook-form input,
-.guestbook-password-form input {
-  height:clamp(41px,8.8vw,45px);
-  padding:0 clamp(10px,2.35vw,12px);
-}
-.guestbook-form textarea {
-  min-height:clamp(96px,24vw,116px);
-  max-height:180px;
-  padding:clamp(10px,2.35vw,12px);
-}
-.guestbook-message-ko,
-.guestbook-message-yue { font-size:clamp(10px,2.15vw,11px); }
-.guestbook-submit,
-.guestbook-password-submit { min-height:clamp(41px,8.8vw,45px); }
-
-@media (max-height:620px) {
-  .guestbook-modal-card { max-height:calc(100dvh - 24px); padding-top:29px; }
-  .guestbook-modal-card h2 small { margin-top:2px; }
-  .guestbook-modal-card > p { margin-bottom:9px; line-height:1.3; }
-  .guestbook-form textarea { min-height:82px; }
-}
 .gift-section { position:relative; z-index:4; padding:76px 24px 82px; text-align:center; background:#f8f7f5; }
 .gift-line { display:block; width:54px; height:1px; margin:0 auto 62px; background:#37322f; }
 .gift-section h2 { margin:0 0 12px; font-size:var(--text-16); font-weight:500; letter-spacing:.04em; }
@@ -346,14 +204,14 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
 .closing.is-visible > * { animation:section-rise 1.55s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
 .gallery-panel.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); }
 .gallery-panel.is-visible { animation:gallery-rise 1.55s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
-.gift-section.reveal-pending, .guestbook-section.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); }
-.gift-section.is-visible, .guestbook-section.is-visible { animation:gallery-rise 1.55s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
+.gift-section.reveal-pending { opacity:0; transform:translate3d(0,140px,0) scale(.985); }
+.gift-section.is-visible { animation:gallery-rise 1.55s var(--reveal-delay,0ms) cubic-bezier(.16,.62,.18,1) both; }
 .wedding-card,
 .family-section.reveal-pending > *,
 .location-section.reveal-pending > *,
 .closing.reveal-pending > *,
 .gallery-panel.reveal-pending,
-.gift-section.reveal-pending, .guestbook-section.reveal-pending { -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform,opacity; }
+.gift-section.reveal-pending { -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform,opacity; }
 .section-kicker { margin:0 0 11px; color:var(--accent); font:600 var(--text-8)/1 Arial,sans-serif; letter-spacing:.3em; }
 .wedding-day h2 { margin:0; font:400 var(--text-30)/1.3 Georgia,serif; letter-spacing:.12em; white-space:nowrap; }
 .day-ornament { display:block; margin:20px 0 27px; color:#bc9186; font-size:var(--text-11); }
@@ -385,7 +243,7 @@ body.guestbook-modal-open { position:fixed; right:0; left:0; }
 .closing p { margin:0 0 12px; font:500 var(--text-9)/1 Arial,sans-serif; letter-spacing:.34em; }
 .closing span { display:inline-block; font-size:var(--text-13); font-weight:300; letter-spacing:.05em; }
 .closing > small { display:block; margin-top:7px; color:#d8ccc4; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:var(--text-12); font-weight:300; letter-spacing:.05em; }
-.family-section, .wedding-day, .location-section, .guestbook-section, .gift-section, .closing { contain:paint; }
+.family-section, .wedding-day, .location-section, .gift-section, .closing { contain:paint; }
 .lightbox[hidden] { display:none; }
 .lightbox { position:fixed; z-index:20; inset:0; display:grid; place-items:center; background:#0d0c0b; animation:fade-in .25s ease both; }
 .lightbox-backdrop { position:absolute; inset:0; width:100%; border:0; background:transparent; }
