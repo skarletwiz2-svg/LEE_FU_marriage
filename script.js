@@ -344,30 +344,78 @@ document.querySelectorAll(".copy-account").forEach((button) => {
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");
 const counter = document.querySelector(".lightbox-count");
+const previewSources = Array.from(
+  document.querySelectorAll(".photo-button img"),
+  (image) => image.currentSrc || image.src
+);
+const photoLoadCache = new Map();
 let currentPhotoIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 let isSwipeTracking = false;
 let isPinchGesture = false;
 let isPhotoSwitching = false;
+let photoRequestToken = 0;
+
+function normalizePhotoIndex(index) {
+  return (index + photos.length) % photos.length;
+}
+
+function preloadPhoto(index) {
+  const normalizedIndex = normalizePhotoIndex(index);
+  const source = photos[normalizedIndex].src;
+  if (photoLoadCache.has(source)) return photoLoadCache.get(source);
+
+  const entry = { ready: false, promise: null };
+  entry.promise = new Promise((resolve) => {
+    const loader = new Image();
+    loader.decoding = "async";
+    loader.onload = async () => {
+      try {
+        if (typeof loader.decode === "function") await loader.decode();
+      } catch (error) {
+        // The decoded image is still safe to use after a successful load.
+      }
+      entry.ready = true;
+      resolve(source);
+    };
+    loader.onerror = () => resolve(null);
+    loader.src = source;
+  });
+  photoLoadCache.set(source, entry);
+  return entry;
+}
 
 function showPhoto(index) {
-  currentPhotoIndex = (index + photos.length) % photos.length;
-  fullImage.src = photos[currentPhotoIndex].src;
-  fullImage.alt = photos[currentPhotoIndex].alt;
+  currentPhotoIndex = normalizePhotoIndex(index);
+  const requestToken = ++photoRequestToken;
+  const photo = photos[currentPhotoIndex];
+  const cachedPhoto = photoLoadCache.get(photo.src);
+
+  fullImage.src = cachedPhoto?.ready ? photo.src : previewSources[currentPhotoIndex];
+  fullImage.alt = photo.alt;
   counter.textContent = `${String(currentPhotoIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+
+  preloadPhoto(currentPhotoIndex).promise.then((source) => {
+    if (!source || requestToken !== photoRequestToken || lightbox.hidden) return;
+    fullImage.src = source;
+  });
+  preloadPhoto(currentPhotoIndex - 1);
+  preloadPhoto(currentPhotoIndex + 1);
 }
 
 function slideToPhoto(index, direction) {
   if (isPhotoSwitching) return;
   isPhotoSwitching = true;
 
+  const targetIndex = normalizePhotoIndex(index);
   const outgoingClass = direction === "next" ? "slide-out-left" : "slide-out-right";
   const incomingClass = direction === "next" ? "slide-in-right" : "slide-in-left";
+  preloadPhoto(targetIndex);
   fullImage.classList.add(outgoingClass);
 
   setTimeout(() => {
-    showPhoto(index);
+    showPhoto(targetIndex);
     fullImage.classList.remove(outgoingClass);
     fullImage.classList.add(incomingClass);
 
@@ -379,6 +427,9 @@ function slideToPhoto(index, direction) {
 }
 
 function closeLightbox() {
+  photoRequestToken += 1;
+  isPhotoSwitching = false;
+  fullImage.classList.remove("slide-out-left", "slide-out-right", "slide-in-left", "slide-in-right");
   lightbox.hidden = true;
   document.body.style.overflow = "";
 }
