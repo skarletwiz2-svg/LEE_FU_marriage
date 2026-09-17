@@ -359,6 +359,32 @@ document.querySelectorAll(".copy-account").forEach((button) => {
   });
 });
 
+const galleryPreviewLimit = 20;
+const galleryGrid = document.querySelector(".photo-grid");
+const galleryPreviewButtons = galleryGrid
+  ? Array.from(galleryGrid.querySelectorAll(".photo-button"))
+  : [];
+
+galleryPreviewButtons.slice(galleryPreviewLimit).forEach((button) => {
+  const image = button.querySelector("img");
+  if (image) image.removeAttribute("src");
+  button.remove();
+});
+
+if (galleryGrid && photos.length > galleryPreviewLimit) {
+  const remainingPhotoCount = photos.length - galleryPreviewLimit;
+  const moreButton = document.createElement("button");
+  moreButton.className = "photo-button gallery-more";
+  moreButton.type = "button";
+  moreButton.dataset.index = String(galleryPreviewLimit);
+  moreButton.setAttribute("aria-label", `남은 사진 ${remainingPhotoCount}장 전체 화면으로 보기`);
+  moreButton.innerHTML = `
+    <span class="gallery-more-ellipsis" aria-hidden="true">…</span>
+    <span class="gallery-more-count" aria-hidden="true">+${remainingPhotoCount}</span>
+  `;
+  galleryGrid.appendChild(moreButton);
+}
+
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");
 const counter = document.querySelector(".lightbox-count");
