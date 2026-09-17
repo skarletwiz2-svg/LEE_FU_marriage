@@ -388,18 +388,15 @@ if (galleryGrid && photos.length > galleryPreviewLimit) {
 const lightbox = document.querySelector(".lightbox");
 const fullImage = document.querySelector(".lightbox-image");
 const counter = document.querySelector(".lightbox-count");
-const previewSources = Array.from(
-  document.querySelectorAll(".photo-button img"),
-  (image) => image.currentSrc || image.src
-);
 const photoLoadCache = new Map();
 let currentPhotoIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 let isSwipeTracking = false;
 let isPinchGesture = false;
-let isPhotoSwitching = false;
 let photoRequestToken = 0;
+let lightboxHistoryActive = false;
+const lightboxHistoryKey = "weddingGalleryLightbox";
 
 function normalizePhotoIndex(index) {
   return (index + photos.length) % photos.length;
@@ -423,73 +420,97 @@ function preloadPhoto(index) {
       entry.ready = true;
       resolve(source);
     };
-    loader.onerror = () => resolve(null);
+    loader.onerror = () => {
+      photoLoadCache.delete(source);
+      resolve(null);
+    };
     loader.src = source;
   });
   photoLoadCache.set(source, entry);
   return entry;
 }
 
-function showPhoto(index) {
+async function showPhoto(index) {
   currentPhotoIndex = normalizePhotoIndex(index);
   const requestToken = ++photoRequestToken;
   const photo = photos[currentPhotoIndex];
-  const cachedPhoto = photoLoadCache.get(photo.src);
+  const photoEntry = preloadPhoto(currentPhotoIndex);
 
-  fullImage.src = cachedPhoto?.ready ? photo.src : previewSources[currentPhotoIndex];
   fullImage.alt = photo.alt;
   counter.textContent = `${String(currentPhotoIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+  fullImage.classList.add("is-loading");
 
-  preloadPhoto(currentPhotoIndex).promise.then((source) => {
-    if (!source || requestToken !== photoRequestToken || lightbox.hidden) return;
-    fullImage.src = source;
+  for (let offset = 1; offset <= 2; offset += 1) {
+    preloadPhoto(currentPhotoIndex - offset);
+    preloadPhoto(currentPhotoIndex + offset);
+  }
+
+  const source = photoEntry.ready ? photo.src : await photoEntry.promise;
+  if (!source || requestToken !== photoRequestToken || lightbox.hidden) return;
+
+  fullImage.src = source;
+  try {
+    if (typeof fullImage.decode === "function") await fullImage.decode();
+  } catch (error) {
+    // A loaded image can still be displayed when decode() is unavailable or interrupted.
+  }
+  if (requestToken !== photoRequestToken || lightbox.hidden) return;
+
+  requestAnimationFrame(() => {
+    if (requestToken === photoRequestToken && !lightbox.hidden) {
+      fullImage.classList.remove("is-loading");
+    }
   });
-  preloadPhoto(currentPhotoIndex - 1);
-  preloadPhoto(currentPhotoIndex + 1);
 }
 
-function slideToPhoto(index, direction) {
-  if (isPhotoSwitching) return;
-  isPhotoSwitching = true;
-
-  const targetIndex = normalizePhotoIndex(index);
-  const outgoingClass = direction === "next" ? "slide-out-left" : "slide-out-right";
-  const incomingClass = direction === "next" ? "slide-in-right" : "slide-in-left";
-  preloadPhoto(targetIndex);
-  fullImage.classList.add(outgoingClass);
-
-  setTimeout(() => {
-    showPhoto(targetIndex);
-    fullImage.classList.remove(outgoingClass);
-    fullImage.classList.add(incomingClass);
-
-    setTimeout(() => {
-      fullImage.classList.remove(incomingClass);
-      isPhotoSwitching = false;
-    }, 170);
-  }, 130);
+function slideToPhoto(index) {
+  showPhoto(index);
 }
 
-function closeLightbox() {
+function closeLightbox({ fromHistory = false } = {}) {
+  if (lightbox.hidden) return;
   photoRequestToken += 1;
-  isPhotoSwitching = false;
-  fullImage.classList.remove("slide-out-left", "slide-out-right", "slide-in-left", "slide-in-right");
+  fullImage.classList.remove("is-loading");
   lightbox.hidden = true;
   document.body.style.overflow = "";
+
+  const shouldRestoreHistory = lightboxHistoryActive && !fromHistory;
+  lightboxHistoryActive = false;
+  if (shouldRestoreHistory) history.back();
+}
+
+function openLightbox(index) {
+  lightbox.hidden = false;
+  document.body.style.overflow = "hidden";
+  showPhoto(index);
+
+  try {
+    history.pushState(
+      { ...(history.state || {}), [lightboxHistoryKey]: true },
+      "",
+      window.location.href
+    );
+    lightboxHistoryActive = true;
+  } catch (error) {
+    lightboxHistoryActive = false;
+  }
+
+  document.querySelector(".close-button").focus({ preventScroll: true });
 }
 
 document.querySelectorAll(".photo-button").forEach((button) => {
   button.addEventListener("click", () => {
     const index = Number(button.dataset.index);
-    showPhoto(index);
-    lightbox.hidden = false;
-    document.body.style.overflow = "hidden";
-    document.querySelector(".close-button").focus();
+    openLightbox(index);
   });
 });
 
-document.querySelector(".close-button").addEventListener("click", closeLightbox);
-document.querySelector(".lightbox-backdrop").addEventListener("click", closeLightbox);
+document.querySelector(".close-button").addEventListener("click", () => closeLightbox());
+document.querySelector(".lightbox-backdrop").addEventListener("click", () => closeLightbox());
+
+window.addEventListener("popstate", () => {
+  if (!lightbox.hidden) closeLightbox({ fromHistory: true });
+});
 
 lightbox.addEventListener("touchstart", (event) => {
   if (event.touches.length > 1) {
@@ -523,7 +544,7 @@ lightbox.addEventListener("touchend", (event) => {
 
   if (Math.abs(deltaX) < 50 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
   const isNext = deltaX < 0;
-  slideToPhoto(currentPhotoIndex + (isNext ? 1 : -1), isNext ? "next" : "previous");
+  slideToPhoto(currentPhotoIndex + (isNext ? 1 : -1));
 }, { passive: true });
 
 lightbox.addEventListener("touchcancel", () => {
@@ -533,6 +554,6 @@ lightbox.addEventListener("touchcancel", () => {
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
-  if (event.key === "ArrowLeft" && !lightbox.hidden) slideToPhoto(currentPhotoIndex - 1, "previous");
-  if (event.key === "ArrowRight" && !lightbox.hidden) slideToPhoto(currentPhotoIndex + 1, "next");
+  if (event.key === "ArrowLeft" && !lightbox.hidden) slideToPhoto(currentPhotoIndex - 1);
+  if (event.key === "ArrowRight" && !lightbox.hidden) slideToPhoto(currentPhotoIndex + 1);
 });
