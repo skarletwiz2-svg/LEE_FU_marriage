@@ -514,6 +514,7 @@ window.addEventListener("popstate", () => {
 
 lightbox.addEventListener("touchstart", (event) => {
   if (event.touches.length > 1) {
+    event.preventDefault();
     isPinchGesture = true;
     isSwipeTracking = false;
     return;
@@ -522,14 +523,21 @@ lightbox.addEventListener("touchstart", (event) => {
   isSwipeTracking = true;
   touchStartX = event.touches[0].clientX;
   touchStartY = event.touches[0].clientY;
-}, { passive: true });
+}, { passive: false });
 
 lightbox.addEventListener("touchmove", (event) => {
   if (event.touches.length > 1) {
+    event.preventDefault();
     isPinchGesture = true;
     isSwipeTracking = false;
   }
-}, { passive: true });
+}, { passive: false });
+
+["gesturestart", "gesturechange", "gestureend"].forEach((eventName) => {
+  lightbox.addEventListener(eventName, (event) => {
+    event.preventDefault();
+  }, { passive: false });
+});
 
 lightbox.addEventListener("touchend", (event) => {
   if (isPinchGesture) {
