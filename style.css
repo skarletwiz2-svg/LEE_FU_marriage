@@ -1,3 +1,12 @@
+@font-face { font-family:"Nanum Pen Script"; src:url("fonts/nanum-pen-script.woff2") format("woff2"); font-style:normal; font-weight:400; font-display:block; }
+@font-face { font-family:"LXGW WenKai TC"; src:url("fonts/lxgw-wenkai-tc.woff2") format("woff2"); font-style:normal; font-weight:400; font-display:block; }
+@font-face { font-family:"Noto Serif KR"; src:url("fonts/noto-serif-kr-300.woff2") format("woff2"); font-style:normal; font-weight:300; font-display:swap; }
+@font-face { font-family:"Noto Serif KR"; src:url("fonts/noto-serif-kr-400.woff2") format("woff2"); font-style:normal; font-weight:400; font-display:swap; }
+@font-face { font-family:"Noto Serif KR"; src:url("fonts/noto-serif-kr-500.woff2") format("woff2"); font-style:normal; font-weight:500; font-display:swap; }
+@font-face { font-family:"Noto Serif HK"; src:url("fonts/noto-serif-hk-300.woff2") format("woff2"); font-style:normal; font-weight:300; font-display:swap; }
+@font-face { font-family:"Noto Serif HK"; src:url("fonts/noto-serif-hk-400.woff2") format("woff2"); font-style:normal; font-weight:400; font-display:swap; }
+@font-face { font-family:"Noto Serif HK"; src:url("fonts/noto-serif-hk-500.woff2") format("woff2"); font-style:normal; font-weight:500; font-display:swap; }
+
 :root {
   --paper:#f6f1ea; --ink:#24211f; --muted:#7d746d; --accent:#ad7d72; --hero-height:100svh;
   --text-8:clamp(7px,2.05vw,9px); --text-9:clamp(8px,2.31vw,10px);
@@ -11,7 +20,7 @@
 }
 * { box-sizing:border-box; }
 html,body { margin:0; min-height:100%; background:#171513; }
-body { color:var(--ink); font-family:"Noto Serif KR","Batang","Times New Roman",serif; }
+body { color:var(--ink); font-family:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic","Batang","Times New Roman",serif; }
 html.intro-locked { --hero-height:100dvh !important; height:100%; overflow:hidden; overscroll-behavior:none; }
 body.intro-locked { position:fixed; inset:0; width:100%; height:100%; overflow:hidden; overscroll-behavior:none; }
 html.intro-unlocked,
@@ -28,7 +37,7 @@ button { font:inherit; }
 .hero-shade { position:absolute; z-index:-2; top:0; left:0; width:100%; height:var(--hero-height); background:linear-gradient(180deg,rgba(15,12,10,.08),rgba(15,12,10,.1) 40%,rgba(20,16,14,.58)); animation:deepen 1.2s ease forwards; }
 .start-prompt { position:absolute; z-index:4; top:0; left:0; display:flex; flex-direction:column; justify-content:flex-end; width:100%; height:var(--hero-height); padding:0 24px max(62px,calc(46px + env(safe-area-inset-bottom))); border:0; color:#fff; background:transparent; text-align:center; text-shadow:0 2px 14px rgba(0,0,0,.55); transition:opacity .45s ease,visibility .45s ease; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
 .start-prompt p { margin:0; font-size:clamp(13px,3.65vw,16px); line-height:1.65; letter-spacing:.025em; word-break:keep-all; }
-.start-prompt p[lang="zh-HK"] { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK",serif; font-size:clamp(12px,3.35vw,15px); }
+.start-prompt p[lang="zh-HK"] { margin-top:5px; font-family:"LXGW WenKai TC","Noto Serif HK","PingFang HK","Microsoft JhengHei",serif; font-size:clamp(12px,3.35vw,15px); }
 .invitation.is-ready .start-prompt { opacity:0; visibility:hidden; pointer-events:none; }
 .intro { height:var(--hero-height); padding:54px 30px 20px; color:#fff; text-align:center; letter-spacing:.08em; animation:intro-away .7s ease forwards; }
 .eyebrow { margin:0 0 12px; font:500 var(--text-10)/1.4 Arial,sans-serif; letter-spacing:.36em; }
@@ -37,8 +46,8 @@ button { font:inherit; }
 .story { position:absolute; top:0; left:0; z-index:2; width:100%; height:var(--hero-height); pointer-events:none; display:grid; place-items:center; padding:90px 28px 74px; color:#fff; text-align:center; }
 .story-copy { position:absolute; width:calc(100% - 52px); opacity:0; text-shadow:0 2px 15px rgba(0,0,0,.45); }
 .story-copy p { margin:0 0 14px; white-space:nowrap; overflow-wrap:normal; word-break:keep-all; }
-.story-ko { font-family:"Nanum Pen Script","LXGW WenKai TC","Segoe Print",cursive; font-size:clamp(17px,4.7vw,23px); line-height:1.35; letter-spacing:.015em; animation:story-show 5s ease-in-out both; }
-.story-yue { font-family:"Nanum Pen Script","LXGW WenKai TC","Segoe Print",cursive; font-size:clamp(17px,4.7vw,23px); font-weight:400; line-height:1.85; letter-spacing:.035em; animation:story-show 5s 5s ease-in-out both; }
+.story-ko { font-family:"Nanum Pen Script","Apple SD Gothic Neo","Malgun Gothic",sans-serif; font-size:clamp(17px,4.7vw,23px); line-height:1.35; letter-spacing:.015em; animation:story-show 5s ease-in-out both; }
+.story-yue { font-family:"LXGW WenKai TC","Noto Serif HK","PingFang HK","Microsoft JhengHei",serif; font-size:clamp(17px,4.7vw,23px); font-weight:400; line-height:1.85; letter-spacing:.035em; animation:story-show 5s 5s ease-in-out both; }
 .story-copy p[lang="ko"] { font-size:clamp(16px,5.4vw,28px); }
 .story-copy p[lang="zh-HK"] { font-size:inherit; }
 .petals { position:absolute; z-index:2; top:0; left:0; width:100%; height:var(--hero-height); overflow:hidden; pointer-events:none; opacity:0; visibility:visible; animation:petals-window 10s ease both; }
@@ -271,3 +280,4 @@ button { font:inherit; }
 @keyframes wedding-rise { from { opacity:0; transform:translate3d(0,190px,0) rotateX(4deg) scale(.965); } to { opacity:1; transform:translate3d(0,0,0) rotateX(0) scale(1); } }
 @media (max-width:360px) { .wedding-day { padding-right:3px; padding-left:3px; } }
 @media (min-width:521px) { .invitation { box-shadow:0 0 80px rgba(0,0,0,.4); } }
+
