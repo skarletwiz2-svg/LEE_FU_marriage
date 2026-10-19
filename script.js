@@ -1,7 +1,7 @@
 const photos = [
   { src: "images/KJH02144-2.jpg?v=20260721-8", alt: "웨딩 갤러리 사진 1" },
   { src: "images/KJH02546-2.jpg?v=20260721-8", alt: "웨딩 갤러리 사진 2" },
-  { src: "images/KJH01666-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 3" },
+  { src: "images/revised-1.jpg?v=20261019-1", alt: "웨딩 갤러리 사진 3" },
   { src: "images/KJH03178-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 4" },
   { src: "images/KJH03296-1.jpg?v=20260722-1", alt: "웨딩 갤러리 사진 5" },
   { src: "images/260917-002-alt.jpg?v=20260917-1", alt: "웨딩 갤러리 사진 6" },
@@ -364,6 +364,11 @@ const galleryGrid = document.querySelector(".photo-grid");
 const galleryPreviewButtons = galleryGrid
   ? Array.from(galleryGrid.querySelectorAll(".photo-button"))
   : [];
+
+const revisedPhotoPreview = galleryGrid?.querySelector('.photo-button[data-index="2"] img');
+if (revisedPhotoPreview) {
+  revisedPhotoPreview.src = "images/revised-1-thumb.webp?v=20261019-1";
+}
 
 galleryPreviewButtons.slice(galleryPreviewLimit).forEach((button) => {
   const image = button.querySelector("img");
